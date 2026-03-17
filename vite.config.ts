@@ -2,10 +2,16 @@ import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
 import mkcert from 'vite-plugin-mkcert';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/habitroast/',
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
   css: {
     preprocessorOptions: {
       scss: {
@@ -27,7 +33,10 @@ export default defineConfig({
   ],
   build: {
     target: 'esnext',
-    minify: 'terser'
+    minify: 'terser',
+    rollupOptions: {
+      input: './index.html',
+    },
   },
   publicDir: './public',
   server: {

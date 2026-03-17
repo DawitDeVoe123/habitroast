@@ -1,5 +1,4 @@
 import { initData, type ThemeParams, retrieveLaunchParams, type InitData } from '@telegram-apps/sdk-react';
-import { type } from '@tauri-apps/plugin-os';
 
 /**
  * Initializes the mock environment for development.
@@ -13,7 +12,7 @@ export function initMockEnvironment(): void {
 /**
  * Initializes the Telegram Mini Apps environment.
  */
-export function init(): void {
+export async function init(): Promise<void> {
   try {
     // Initialize the SDK
     initData.restore();
