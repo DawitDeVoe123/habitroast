@@ -1,21 +1,31 @@
 import { useEffect, useState } from 'react';
-import { retrieveLaunchParams } from '@telegram-apps/sdk-react';
 import { Page } from '@/components/Page.tsx';
 
-export const IndexPage: FC = () => {
-  const [user, setUser] = useState(null);
+// Define the User type
+interface User {
+  firstName?: string;
+  id: number;
+  lastName?: string;
+  username?: string;
+}
+
+export const IndexPage = () => {
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    // Get Telegram user data
+    // Try to get Telegram user data from the native WebApp
     try {
-      const { initData } = retrieveLaunchParams();
-      if (initData?.user) {
-        setUser(initData.user);
-        console.log('User loaded:', initData.user);
+      // @ts-ignore - Telegram WebApp is injected globally
+      const tg = window.Telegram?.WebApp;
+      if (tg?.initDataUnsafe?.user) {
+        setUser(tg.initDataUnsafe.user);
+        console.log('User loaded:', tg.initDataUnsafe.user);
+      } else {
+        // Mock user for development
+        setUser({ firstName: 'Roast Seeker', id: 12345 });
       }
     } catch (error) {
       console.log('Running in dev mode with mock data');
-      // Mock user for development
       setUser({ firstName: 'Roast Seeker', id: 12345 });
     }
   }, []);

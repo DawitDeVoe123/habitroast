@@ -1,75 +1,49 @@
-import {
-  setDebug,
-  themeParams,
-  initData,
-  viewport,
-  init as initSDK,
-  mockTelegramEnv,
-  type ThemeParams,
-  retrieveLaunchParams,
-  emitEvent,
-  miniApp,
-  backButton,
-} from '@tma.js/sdk-react';
+import { initData, type ThemeParams, retrieveLaunchParams, type InitData } from '@telegram-apps/sdk-react';
+import { type } from '@tauri-apps/plugin-os';
 
 /**
- * Initializes the application and configures its dependencies.
+ * Initializes the mock environment for development.
+ * This function is called only in development mode.
  */
-export async function init(options: {
-  debug: boolean;
-  eruda: boolean;
-  mockForMacOS: boolean;
-}): Promise<void> {
-  // Set @telegram-apps/sdk-react debug mode and initialize it.
-  setDebug(options.debug);
-  initSDK();
+export function initMockEnvironment(): void {
+  // We don't need to do anything here for now
+  console.log('Mock environment initialized');
+}
 
-  // Add Eruda if needed.
-  options.eruda && void import('eruda').then(({ default: eruda }) => {
-    eruda.init();
-    eruda.position({ x: window.innerWidth - 50, y: 0 });
-  });
+/**
+ * Initializes the Telegram Mini Apps environment.
+ */
+export function init(): void {
+  try {
+    // Initialize the SDK
+    initData.restore();
 
-  // Telegram for macOS has a ton of bugs, including cases, when the client doesn't
-  // even response to the "web_app_request_theme" method. It also generates an incorrect
-  // event for the "web_app_request_safe_area" method.
-  if (options.mockForMacOS) {
-    let firstThemeSent = false;
-    mockTelegramEnv({
-      onEvent(event, next) {
-        if (event.name === 'web_app_request_theme') {
-          let tp: ThemeParams = {};
-          if (firstThemeSent) {
-            tp = themeParams.state();
-          } else {
-            firstThemeSent = true;
-            tp ||= retrieveLaunchParams().tgWebAppThemeParams;
-          }
-          return emitEvent('theme_changed', { theme_params: tp });
-        }
-
-        if (event.name === 'web_app_request_safe_area') {
-          return emitEvent('safe_area_changed', { left: 0, top: 0, right: 0, bottom: 0 });
-        }
-
-        next();
-      },
-    });
+    // Log launch params for debugging
+    const lp = retrieveLaunchParams();
+    console.log('Launch params:', lp);
+  } catch (error) {
+    console.error('Failed to initialize Telegram Mini Apps:', error);
   }
+}
 
-  // Mount all components used in the project.
-  backButton.mount.ifAvailable();
-  initData.restore();
-
-  if (miniApp.mount.isAvailable()) {
-    themeParams.mount();
-    miniApp.mount();
-    themeParams.bindCssVars();
-  }
-
-  if (viewport.mount.isAvailable()) {
-    viewport.mount().then(() => {
-      viewport.bindCssVars();
-    });
+// For TypeScript, declare the Telegram WebApp object
+declare global {
+  interface Window {
+    Telegram?: {
+      WebApp?: {
+        initDataUnsafe?: {
+          user?: {
+            id: number;
+            first_name?: string;
+            last_name?: string;
+            username?: string;
+            language_code?: string;
+          };
+        };
+        ready: () => void;
+        expand: () => void;
+        close: () => void;
+      };
+    };
   }
 }
