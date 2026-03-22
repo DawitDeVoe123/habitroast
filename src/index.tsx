@@ -4,8 +4,16 @@ import { HashRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 
-// Import mock environment to make app work outside Telegram
-import './mockEnv.ts';
+// Global error handler to prevent crashes
+window.onerror = function (message, source, lineno, colno, error) {
+  console.log('Global error:', message);
+  return true;
+};
+
+window.onunhandledrejection = function (event) {
+  console.log('Unhandled rejection:', event.reason);
+  event.preventDefault();
+};
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
