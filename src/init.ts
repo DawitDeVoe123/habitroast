@@ -1,16 +1,8 @@
-import { initData, type ThemeParams, retrieveLaunchParams, type InitData } from '@telegram-apps/sdk-react';
-
-/**
- * Initializes the mock environment for development.
- * This function is called only in development mode.
- */
-export function initMockEnvironment(): void {
-  // We don't need to do anything here for now
-  console.log('Mock environment initialized');
-}
+import { initData, retrieveLaunchParams } from '@telegram-apps/sdk-react';
 
 /**
  * Initializes the Telegram Mini Apps environment.
+ * Handles both production and mock environments.
  */
 export async function init(): Promise<void> {
   try {
@@ -21,7 +13,8 @@ export async function init(): Promise<void> {
     const lp = retrieveLaunchParams();
     console.log('Launch params:', lp);
   } catch (error) {
-    console.error('Failed to initialize Telegram Mini Apps:', error);
+    // Running outside Telegram - this is expected in Vercel/web browser
+    console.log('Running outside Telegram (expected in web browser):', error);
   }
 }
 
