@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '@/components/Page.tsx';
+import { GloryShameFeed } from '@/components/GloryShameFeed/GloryShameFeed';
 
 // Define the User type
 interface User {
@@ -226,6 +227,40 @@ export const IndexPage = () => {
           </button>
 
           <button
+            onClick={() => navigate('/circles')}
+            style={{
+              background: 'transparent',
+              color: 'var(--tg-theme-text-color, #1A1A1A)',
+              border: '2px solid var(--tg-theme-button-color, #FF6B35)',
+              padding: '16px',
+              borderRadius: '12px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              width: '100%'
+            }}
+          >
+            👥 Accountability Circles
+          </button>
+
+          <button
+            onClick={() => navigate('/streak-battles')}
+            style={{
+              background: 'transparent',
+              color: 'var(--tg-theme-text-color, #1A1A1A)',
+              border: '2px solid var(--tg-theme-button-color, #FF6B35)',
+              padding: '16px',
+              borderRadius: '12px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              width: '100%'
+            }}
+          >
+            ⚔️ Streak Battles
+          </button>
+
+          <button
             onClick={() => alert(getRandomRoast())}
             style={{
               background: 'var(--tg-theme-text-color, #1A1A1A)',
@@ -356,6 +391,11 @@ export const IndexPage = () => {
               : 'All done! Your future self is proud. 🎉'
             }"
           </p>
+        </div>
+
+        {/* Glory/Shame Feed */}
+        <div style={{ marginTop: '20px' }}>
+          <GloryShameFeed />
         </div>
       </div>
     </Page>

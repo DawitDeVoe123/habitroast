@@ -8,6 +8,8 @@ import { TONConnectPage } from '@/pages/TONConnectPage/TONConnectPage';
 import { CreateHabitPage } from '@/pages/CreateHabitPage/CreateHabitPage';
 import { HabitsPage } from '@/pages/HabitsPage/HabitsPage';
 import { AccountabilityCirclePage } from '@/pages/AccountabilityCirclePage/AccountabilityCirclePage';
+import { CirclePage } from '@/pages/CirclePage/CirclePage';
+import { StreakBattlesPage } from '@/pages/StreakBattlesPage/StreakBattlesPage';
 
 interface Route {
   path: string;
@@ -21,6 +23,8 @@ export const routes: Route[] = [
   { path: '/create-habit', Component: CreateHabitPage, title: 'Create Habit' },
   { path: '/habits', Component: HabitsPage, title: 'My Habits' },
   { path: '/accountability-circle', Component: AccountabilityCirclePage, title: 'Accountability Circle' },
+  { path: '/circles', Component: CirclePage, title: 'Circles' },
+  { path: '/streak-battles', Component: StreakBattlesPage, title: 'Streak Battles' },
   { path: '/init-data', Component: InitDataPage, title: 'Init Data' },
   { path: '/theme-params', Component: ThemeParamsPage, title: 'Theme Params' },
   { path: '/launch-params', Component: LaunchParamsPage, title: 'Launch Params' },
