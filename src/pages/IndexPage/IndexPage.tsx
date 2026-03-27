@@ -279,6 +279,57 @@ export const IndexPage = () => {
           </button>
 
           <button
+            onClick={() => navigate('/invite')}
+            style={{
+              background: 'transparent',
+              color: 'var(--tg-theme-text-color, #1A1A1A)',
+              border: '2px solid var(--tg-theme-button-color, #FF6B35)',
+              padding: '16px',
+              borderRadius: '12px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              width: '100%'
+            }}
+          >
+            🎁 Invite to Unlock
+          </button>
+
+          <button
+            onClick={() => navigate('/leaderboard')}
+            style={{
+              background: 'transparent',
+              color: 'var(--tg-theme-text-color, #1A1A1A)',
+              border: '2px solid var(--tg-theme-button-color, #FF6B35)',
+              padding: '16px',
+              borderRadius: '12px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              width: '100%'
+            }}
+          >
+            🏆 Leaderboard
+          </button>
+
+          <button
+            onClick={() => navigate('/premium-themes')}
+            style={{
+              background: 'transparent',
+              color: 'var(--tg-theme-text-color, #1A1A1A)',
+              border: '2px solid var(--tg-theme-button-color, #FF6B35)',
+              padding: '16px',
+              borderRadius: '12px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              width: '100%'
+            }}
+          >
+            🎨 Premium Themes
+          </button>
+
+          <button
             onClick={() => alert(getRandomRoast())}
             style={{
               background: 'var(--tg-theme-text-color, #1A1A1A)',
