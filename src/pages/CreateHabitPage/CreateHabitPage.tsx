@@ -9,6 +9,7 @@ interface HabitFormData {
     reminderTime: string;
     roastLevel: 'mild' | 'medium' | 'savage';
     accountabilityCircle: string[];
+    stakeAmount: number;
 }
 
 export const CreateHabitPage = () => {
@@ -19,6 +20,7 @@ export const CreateHabitPage = () => {
         reminderTime: '09:00',
         roastLevel: 'medium',
         accountabilityCircle: [],
+        stakeAmount: 0,
     });
 
     const [newFriend, setNewFriend] = useState('');
@@ -65,6 +67,7 @@ export const CreateHabitPage = () => {
             streak: 0,
             lastCompleted: null,
             completedDates: [],
+            stakeAmount: formData.stakeAmount || 0,
         };
         localStorage.setItem('habits', JSON.stringify([...existingHabits, newHabit]));
 
@@ -387,6 +390,75 @@ export const CreateHabitPage = () => {
                                 ))}
                             </div>
                         )}
+                    </div>
+
+                    {/* Stake Amount */}
+                    <div style={{ marginBottom: '20px' }}>
+                        <label style={{
+                            display: 'block',
+                            marginBottom: '8px',
+                            fontWeight: 'bold',
+                            fontSize: '14px',
+                        }}>
+                            Stake Amount (Telegram Stars) ⭐
+                        </label>
+                        <p style={{
+                            margin: '0 0 12px 0',
+                            fontSize: '12px',
+                            color: 'var(--tg-theme-hint-color, #666)',
+                        }}>
+                            Put your money where your mouth is! Lose stars if you miss a day.
+                        </p>
+                        <div style={{
+                            display: 'flex',
+                            gap: '8px',
+                            marginBottom: '12px',
+                        }}>
+                            {[0, 10, 50, 100].map((amount) => (
+                                <button
+                                    key={amount}
+                                    type="button"
+                                    onClick={() => setFormData((prev) => ({ ...prev, stakeAmount: amount }))}
+                                    style={{
+                                        flex: 1,
+                                        padding: '12px 8px',
+                                        borderRadius: '8px',
+                                        border: formData.stakeAmount === amount
+                                            ? '2px solid var(--tg-theme-button-color, #FF6B35)'
+                                            : '1px solid var(--tg-theme-hint-color, #ddd)',
+                                        background: formData.stakeAmount === amount
+                                            ? 'var(--tg-theme-button-color, #FF6B35)'
+                                            : 'transparent',
+                                        color: formData.stakeAmount === amount
+                                            ? 'var(--tg-theme-button-text-color, white)'
+                                            : 'var(--tg-theme-text-color, #1A1A1A)',
+                                        cursor: 'pointer',
+                                        fontSize: '14px',
+                                        fontWeight: formData.stakeAmount === amount ? 'bold' : 'normal',
+                                    }}
+                                >
+                                    {amount === 0 ? 'No Stake' : `⭐ ${amount}`}
+                                </button>
+                            ))}
+                        </div>
+                        <input
+                            type="number"
+                            name="stakeAmount"
+                            value={formData.stakeAmount}
+                            onChange={handleInputChange}
+                            placeholder="Custom amount"
+                            min="0"
+                            style={{
+                                width: '100%',
+                                padding: '12px',
+                                borderRadius: '8px',
+                                border: '1px solid var(--tg-theme-hint-color, #ddd)',
+                                fontSize: '16px',
+                                boxSizing: 'border-box',
+                                background: 'var(--tg-theme-bg-color, white)',
+                                color: 'var(--tg-theme-text-color, #1A1A1A)',
+                            }}
+                        />
                     </div>
 
                     {/* Submit Button */}

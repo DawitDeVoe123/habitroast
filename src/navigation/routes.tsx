@@ -10,6 +10,7 @@ import { HabitsPage } from '@/pages/HabitsPage/HabitsPage';
 import { AccountabilityCirclePage } from '@/pages/AccountabilityCirclePage/AccountabilityCirclePage';
 import { CirclePage } from '@/pages/CirclePage/CirclePage';
 import { StreakBattlesPage } from '@/pages/StreakBattlesPage/StreakBattlesPage';
+import { StakePage } from '@/pages/StakePage/StakePage';
 
 interface Route {
   path: string;
@@ -25,6 +26,7 @@ export const routes: Route[] = [
   { path: '/accountability-circle', Component: AccountabilityCirclePage, title: 'Accountability Circle' },
   { path: '/circles', Component: CirclePage, title: 'Circles' },
   { path: '/streak-battles', Component: StreakBattlesPage, title: 'Streak Battles' },
+  { path: '/stake', Component: StakePage, title: 'Stake & Roast' },
   { path: '/init-data', Component: InitDataPage, title: 'Init Data' },
   { path: '/theme-params', Component: ThemeParamsPage, title: 'Theme Params' },
   { path: '/launch-params', Component: LaunchParamsPage, title: 'Launch Params' },

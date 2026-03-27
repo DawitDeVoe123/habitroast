@@ -14,6 +14,7 @@ interface Habit {
     streak: number;
     lastCompleted: string | null;
     completedDates: string[];
+    stakeAmount?: number;
 }
 
 export const HabitsPage = () => {
@@ -243,6 +244,32 @@ export const HabitsPage = () => {
                                             @{friend}
                                         </span>
                                     ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {selectedHabit.stakeAmount && selectedHabit.stakeAmount > 0 && (
+                            <div style={{ marginTop: '15px' }}>
+                                <p style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: 'bold' }}>
+                                    💰 Stake:
+                                </p>
+                                <div style={{
+                                    background: 'var(--tg-theme-bg-color, white)',
+                                    padding: '12px',
+                                    borderRadius: '8px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '8px',
+                                }}>
+                                    <span style={{ fontSize: '24px' }}>⭐</span>
+                                    <div>
+                                        <div style={{ fontSize: '18px', fontWeight: 'bold', color: 'var(--tg-theme-button-color, #FF6B35)' }}>
+                                            {selectedHabit.stakeAmount} Stars
+                                        </div>
+                                        <div style={{ fontSize: '12px', color: 'var(--tg-theme-hint-color, #666)' }}>
+                                            Lose them if you miss a day!
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         )}

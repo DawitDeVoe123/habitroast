@@ -18,6 +18,7 @@ interface Habit {
   lastCompleted: string | null;
   completedDates: string[];
   roastLevel: 'mild' | 'medium' | 'savage';
+  stakeAmount?: number;
 }
 
 export const IndexPage = () => {
@@ -261,6 +262,23 @@ export const IndexPage = () => {
           </button>
 
           <button
+            onClick={() => navigate('/stake')}
+            style={{
+              background: 'transparent',
+              color: 'var(--tg-theme-text-color, #1A1A1A)',
+              border: '2px solid var(--tg-theme-button-color, #FF6B35)',
+              padding: '16px',
+              borderRadius: '12px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              width: '100%'
+            }}
+          >
+            ⭐ Stake & Roast
+          </button>
+
+          <button
             onClick={() => alert(getRandomRoast())}
             style={{
               background: 'var(--tg-theme-text-color, #1A1A1A)',
@@ -307,6 +325,9 @@ export const IndexPage = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span>{getRoastEmoji(habit.roastLevel)}</span>
                   <span style={{ fontSize: '14px' }}>{habit.name}</span>
+                  {habit.stakeAmount && habit.stakeAmount > 0 && (
+                    <span style={{ fontSize: '12px', color: '#FF6B35' }}>⭐{habit.stakeAmount}</span>
+                  )}
                 </div>
                 {isCompletedToday(habit) ? (
                   <span style={{
