@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './components/App';
 import './index.css';
-import './mockEnv';
+import { mockEnvReady } from './mockEnv';
 import { init } from './init';
 
 // Global error handler to prevent crashes
@@ -16,8 +16,10 @@ window.onunhandledrejection = function (event) {
   event.preventDefault();
 };
 
-// Initialize the app
-init().then(() => {
+// Initialize the app - wait for mock environment to be set up first
+mockEnvReady.then(() => {
+  return init();
+}).then(() => {
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
       <App />

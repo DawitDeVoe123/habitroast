@@ -1,7 +1,7 @@
 import { mockTelegramEnv, emitEvent, isTMA } from '@telegram-apps/sdk-react';
 
-// Mock the environment when not running in Telegram (works in both DEV and PROD)
-(async () => {
+// Export a promise that resolves when the mock environment is set up
+export const mockEnvReady = (async () => {
   if (!await isTMA('complete')) {
     const themeParams = {
       accent_text_color: '#6ab2f2',
