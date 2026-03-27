@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Page } from '@/components/Page.tsx';
+import { reminderService } from '@/services/reminderService';
 
 interface Habit {
     id: number;
@@ -19,6 +20,7 @@ export const HabitsPage = () => {
     const [habits, setHabits] = useState<Habit[]>([]);
     const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
     const [selectedHabit, setSelectedHabit] = useState<Habit | null>(null);
+    const [reminderEnabled, setReminderEnabled] = useState<boolean>(true);
 
     useEffect(() => {
         loadHabits();
@@ -55,6 +57,17 @@ export const HabitsPage = () => {
         localStorage.setItem('habits', JSON.stringify(updatedHabits));
         setHabits(updatedHabits);
         setSelectedHabit(null);
+        // Also delete reminder
+        reminderService.deleteReminder(habitId);
+    };
+
+    const toggleReminder = (habitId: number, enabled: boolean) => {
+        reminderService.toggleReminder(habitId, enabled);
+        setReminderEnabled(enabled);
+    };
+
+    const updateReminderTime = (habitId: number, habitName: string, time: string) => {
+        reminderService.saveReminder(habitId, habitName, time, reminderEnabled);
     };
 
     const getRoastEmoji = (level: string) => {
@@ -170,9 +183,42 @@ export const HabitsPage = () => {
                         </div>
 
                         <div style={{ marginBottom: '15px' }}>
-                            <p style={{ margin: '0 0 8px 0', fontSize: '14px', fontWeight: 'bold' }}>
-                                Reminder: {selectedHabit.reminderTime}
-                            </p>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                                <p style={{ margin: 0, fontSize: '14px', fontWeight: 'bold' }}>
+                                    ⏰ Reminder: {selectedHabit.reminderTime}
+                                </p>
+                                <button
+                                    onClick={() => toggleReminder(selectedHabit.id, !reminderEnabled)}
+                                    style={{
+                                        background: reminderEnabled ? 'var(--tg-theme-button-color, #FF6B35)' : 'var(--tg-theme-hint-color, #ccc)',
+                                        color: 'white',
+                                        border: 'none',
+                                        padding: '6px 12px',
+                                        borderRadius: '12px',
+                                        fontSize: '12px',
+                                        fontWeight: 'bold',
+                                        cursor: 'pointer',
+                                    }}
+                                >
+                                    {reminderEnabled ? '🔔 On' : '🔕 Off'}
+                                </button>
+                            </div>
+                            <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
+                                <input
+                                    type="time"
+                                    defaultValue={selectedHabit.reminderTime}
+                                    onChange={(e) => updateReminderTime(selectedHabit.id, selectedHabit.name, e.target.value)}
+                                    style={{
+                                        flex: 1,
+                                        padding: '8px',
+                                        borderRadius: '8px',
+                                        border: '1px solid var(--tg-theme-hint-color, #ddd)',
+                                        fontSize: '14px',
+                                        background: 'var(--tg-theme-bg-color, white)',
+                                        color: 'var(--tg-theme-text-color, #1A1A1A)',
+                                    }}
+                                />
+                            </div>
                             <p style={{ margin: 0, fontSize: '14px', color: 'var(--tg-theme-hint-color, #666)' }}>
                                 Roast Level: {getRoastEmoji(selectedHabit.roastLevel)} {selectedHabit.roastLevel}
                             </p>

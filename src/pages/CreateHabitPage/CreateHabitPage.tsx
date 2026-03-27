@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Page } from '@/components/Page.tsx';
+import { reminderService } from '@/services/reminderService';
 
 interface HabitFormData {
     name: string;
@@ -63,8 +64,12 @@ export const CreateHabitPage = () => {
             createdAt: new Date().toISOString(),
             streak: 0,
             lastCompleted: null,
+            completedDates: [],
         };
         localStorage.setItem('habits', JSON.stringify([...existingHabits, newHabit]));
+
+        // Save reminder settings
+        reminderService.saveReminder(newHabit.id, newHabit.name, newHabit.reminderTime, true);
 
         setIsSubmitting(false);
         setShowSuccess(true);

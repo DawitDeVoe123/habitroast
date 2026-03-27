@@ -5,6 +5,7 @@ import { AppRoot } from '@telegram-apps/telegram-ui';
 
 import { routes } from '@/navigation/routes.tsx';
 import { isRunningInTelegram } from '@/mockEnv';
+import { reminderService } from '@/services/reminderService';
 
 // Error boundary component to catch Telegram SDK errors
 function TelegramWrapper({ children }: { children: ReactNode }) {
@@ -35,6 +36,14 @@ export function App() {
   // Use defaults for when outside Telegram
   let appearance: 'dark' | 'light' = 'dark';
   let platform: 'ios' | 'base' = 'base';
+
+  // Initialize reminder service
+  useEffect(() => {
+    reminderService.init();
+    return () => {
+      reminderService.stop();
+    };
+  }, []);
 
   // Only use Telegram SDK if running in Telegram
   if (isRunningInTelegram) {
