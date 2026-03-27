@@ -11,13 +11,18 @@ export function Page({ children, back = true }: PropsWithChildren<{
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (back) {
-      backButton.show();
-      return backButton.onClick(() => {
-        navigate(-1);
-      });
+    try {
+      if (back) {
+        backButton.show();
+        return backButton.onClick(() => {
+          navigate(-1);
+        });
+      }
+      backButton.hide();
+    } catch (e) {
+      // SDK not initialized yet - this is expected when running outside Telegram
+      console.log('Back button not available:', e);
     }
-    backButton.hide();
   }, [back]);
 
   return <>{children}</>;
