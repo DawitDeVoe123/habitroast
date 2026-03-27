@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { HashRouter } from 'react-router-dom';
-import App from './App';
+import { App } from './components/App';
 import './index.css';
+import './mockEnv';
+import { init } from './init';
 
 // Global error handler to prevent crashes
 window.onerror = function (message, source, lineno, colno, error) {
@@ -15,10 +16,19 @@ window.onunhandledrejection = function (event) {
   event.preventDefault();
 };
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <HashRouter>
+// Initialize the app
+init().then(() => {
+  ReactDOM.createRoot(document.getElementById('root')!).render(
+    <React.StrictMode>
       <App />
-    </HashRouter>
-  </React.StrictMode>
-);
+    </React.StrictMode>
+  );
+}).catch((error) => {
+  console.error('Failed to initialize app:', error);
+  // Still render the app even if init fails
+  ReactDOM.createRoot(document.getElementById('root')!).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+});

@@ -32,8 +32,8 @@ function TelegramWrapper({ children }: { children: ReactNode }) {
 
 export function App() {
   // Use defaults for when outside Telegram
-  let appearance = 'dark';
-  let platform = 'desktop';
+  let appearance: 'dark' | 'light' = 'dark';
+  let platform: 'ios' | 'base' = 'base';
 
   try {
     const lp = useLaunchParams();
