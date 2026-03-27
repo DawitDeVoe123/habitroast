@@ -1,4 +1,4 @@
-import { emitEvent, isTMA, mockTelegramEnv } from '@tma.js/sdk-react';
+import { mockTelegramEnv, emitEvent, isTMA } from '@telegram-apps/sdk-react';
 
 // Mock the environment when not running in Telegram (works in both DEV and PROD)
 (async () => {
@@ -22,11 +22,12 @@ import { emitEvent, isTMA, mockTelegramEnv } from '@tma.js/sdk-react';
 
     mockTelegramEnv({
       onEvent(e) {
-        // Handle Telegram Mini Apps events
-        if (e.name === 'web_app_request_theme') {
+        // Handle Telegram Mini Apps events - events are tuples [eventName, eventData]
+        const [eventName] = e;
+        if (eventName === 'web_app_request_theme') {
           return emitEvent('theme_changed', { theme_params: themeParams });
         }
-        if (e.name === 'web_app_request_viewport') {
+        if (eventName === 'web_app_request_viewport') {
           return emitEvent('viewport_changed', {
             height: window.innerHeight,
             width: window.innerWidth,
@@ -34,10 +35,10 @@ import { emitEvent, isTMA, mockTelegramEnv } from '@tma.js/sdk-react';
             is_state_stable: true,
           });
         }
-        if (e.name === 'web_app_request_content_safe_area') {
+        if (eventName === 'web_app_request_content_safe_area') {
           return emitEvent('content_safe_area_changed', noInsets);
         }
-        if (e.name === 'web_app_request_safe_area') {
+        if (eventName === 'web_app_request_safe_area') {
           return emitEvent('safe_area_changed', noInsets);
         }
       },

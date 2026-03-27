@@ -6,7 +6,7 @@ import { initData, retrieveLaunchParams } from '@telegram-apps/sdk-react';
  */
 export async function init(): Promise<void> {
   try {
-    // Initialize the SDK
+    // Initialize the SDK - this must be called before using any other SDK functions
     initData.restore();
 
     // Log launch params for debugging
