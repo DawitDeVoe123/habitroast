@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Page } from '@/components/Page.tsx';
 
 // Define the User type
@@ -11,6 +12,7 @@ interface User {
 
 export const IndexPage = () => {
   const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Try to get Telegram user data from the native WebApp
@@ -84,7 +86,7 @@ export const IndexPage = () => {
           gap: '12px'
         }}>
           <button
-            onClick={() => alert('✨ Habit creator coming soon!')}
+            onClick={() => navigate('/create-habit')}
             style={{
               background: 'var(--tg-theme-button-color, #FF6B35)',
               color: 'var(--tg-theme-button-text-color, white)',
