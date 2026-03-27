@@ -1,8 +1,14 @@
 import { mockTelegramEnv, emitEvent, isTMA } from '@telegram-apps/sdk-react';
 
+// Export a flag to indicate if we're running in Telegram
+export let isRunningInTelegram = false;
+
 // Export a promise that resolves when the mock environment is set up
 export const mockEnvReady = (async () => {
-  if (!await isTMA('complete')) {
+  const inTelegram = await isTMA('complete');
+  isRunningInTelegram = inTelegram;
+
+  if (!inTelegram) {
     const themeParams = {
       accent_text_color: '#6ab2f2',
       bg_color: '#17212b',
@@ -56,5 +62,6 @@ export const mockEnvReady = (async () => {
     });
 
     console.info('⚠️ Environment mocked (running outside Telegram)');
+    console.info('⚠️ Limited functionality - some SDK methods may not work');
   }
 })();

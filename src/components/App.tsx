@@ -4,6 +4,7 @@ import { useLaunchParams, useSignal, miniApp } from '@telegram-apps/sdk-react';
 import { AppRoot } from '@telegram-apps/telegram-ui';
 
 import { routes } from '@/navigation/routes.tsx';
+import { isRunningInTelegram } from '@/mockEnv';
 
 // Error boundary component to catch Telegram SDK errors
 function TelegramWrapper({ children }: { children: ReactNode }) {
@@ -35,14 +36,17 @@ export function App() {
   let appearance: 'dark' | 'light' = 'dark';
   let platform: 'ios' | 'base' = 'base';
 
-  try {
-    const lp = useLaunchParams();
-    const isDark = useSignal(miniApp.isDark);
-    appearance = isDark ? 'dark' : 'light';
-    platform = ['macos', 'ios'].includes(lp.tgWebAppPlatform) ? 'ios' : 'base';
-  } catch (e) {
-    // Running outside Telegram - use defaults
-    console.log('Using default appearance/platform');
+  // Only use Telegram SDK if running in Telegram
+  if (isRunningInTelegram) {
+    try {
+      const lp = useLaunchParams();
+      const isDark = useSignal(miniApp.isDark);
+      appearance = isDark ? 'dark' : 'light';
+      platform = ['macos', 'ios'].includes(lp.tgWebAppPlatform) ? 'ios' : 'base';
+    } catch (e) {
+      // Running outside Telegram - use defaults
+      console.log('Using default appearance/platform');
+    }
   }
 
   return (

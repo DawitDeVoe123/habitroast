@@ -3,6 +3,7 @@ import { type FC, type MouseEventHandler, useCallback } from 'react';
 import { Link as RouterLink, type LinkProps } from 'react-router-dom';
 
 import { classNames } from '@/css/classnames.ts';
+import { isRunningInTelegram } from '@/mockEnv';
 
 import './Link.css';
 
@@ -30,7 +31,8 @@ export const Link: FC<LinkProps> = ({
     const isExternal = targetUrl.protocol !== currentUrl.protocol
       || targetUrl.host !== currentUrl.host;
 
-    if (isExternal) {
+    // Only use openLink if running in Telegram
+    if (isExternal && isRunningInTelegram) {
       e.preventDefault();
       openLink(targetUrl.toString());
     }

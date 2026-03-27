@@ -15,6 +15,7 @@ import type { FC } from 'react';
 import { DisplayData } from '@/components/DisplayData/DisplayData.tsx';
 import { Page } from '@/components/Page.tsx';
 import { bem } from '@/css/bem.ts';
+import { isRunningInTelegram } from '@/mockEnv';
 
 import './TONConnectPage.css';
 
@@ -68,7 +69,12 @@ export const TONConnectPage: FC = () => {
                 subtitle={wallet.appName}
                 onClick={(e) => {
                   e.preventDefault();
-                  openLink(wallet.aboutUrl);
+                  // Only use openLink if running in Telegram
+                  if (isRunningInTelegram) {
+                    openLink(wallet.aboutUrl);
+                  } else {
+                    window.open(wallet.aboutUrl, '_blank');
+                  }
                 }}
               >
                 <Title level="3">{wallet.name}</Title>

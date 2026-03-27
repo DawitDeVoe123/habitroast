@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { backButton } from '@telegram-apps/sdk-react';
 import { type PropsWithChildren, useEffect } from 'react';
+import { isRunningInTelegram } from '@/mockEnv';
 
 export function Page({ children, back = true }: PropsWithChildren<{
   /**
@@ -11,6 +12,11 @@ export function Page({ children, back = true }: PropsWithChildren<{
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Only use backButton if running in Telegram
+    if (!isRunningInTelegram) {
+      return;
+    }
+
     try {
       if (back) {
         backButton.show();
