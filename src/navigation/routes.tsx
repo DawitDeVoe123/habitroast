@@ -6,6 +6,8 @@ import { LaunchParamsPage } from '@/pages/LaunchParamsPage.tsx';
 import { ThemeParamsPage } from '@/pages/ThemeParamsPage.tsx';
 import { TONConnectPage } from '@/pages/TONConnectPage/TONConnectPage';
 import { CreateHabitPage } from '@/pages/CreateHabitPage/CreateHabitPage';
+import { HabitsPage } from '@/pages/HabitsPage/HabitsPage';
+import { AccountabilityCirclePage } from '@/pages/AccountabilityCirclePage/AccountabilityCirclePage';
 
 interface Route {
   path: string;
@@ -17,6 +19,8 @@ interface Route {
 export const routes: Route[] = [
   { path: '/', Component: IndexPage },
   { path: '/create-habit', Component: CreateHabitPage, title: 'Create Habit' },
+  { path: '/habits', Component: HabitsPage, title: 'My Habits' },
+  { path: '/accountability-circle', Component: AccountabilityCirclePage, title: 'Accountability Circle' },
   { path: '/init-data', Component: InitDataPage, title: 'Init Data' },
   { path: '/theme-params', Component: ThemeParamsPage, title: 'Theme Params' },
   { path: '/launch-params', Component: LaunchParamsPage, title: 'Launch Params' },

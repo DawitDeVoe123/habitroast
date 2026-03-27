@@ -10,8 +10,18 @@ interface User {
   username?: string;
 }
 
+interface Habit {
+  id: number;
+  name: string;
+  streak: number;
+  lastCompleted: string | null;
+  completedDates: string[];
+  roastLevel: 'mild' | 'medium' | 'savage';
+}
+
 export const IndexPage = () => {
   const [user, setUser] = useState<User | null>(null);
+  const [habits, setHabits] = useState<Habit[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,6 +40,10 @@ export const IndexPage = () => {
       console.log('Running in dev mode with mock data');
       setUser({ firstName: 'Roast Seeker', id: 12345 });
     }
+
+    // Load habits from localStorage
+    const storedHabits = JSON.parse(localStorage.getItem('habits') || '[]');
+    setHabits(storedHabits);
   }, []);
 
   // Array of roast messages
@@ -43,6 +57,28 @@ export const IndexPage = () => {
     "The only thing consistent about you is inconsistency.",
     "Your streak is so short, it's basically a dot."
   ];
+
+  const getRandomRoast = () => {
+    return roasts[Math.floor(Math.random() * roasts.length)];
+  };
+
+  const isCompletedToday = (habit: Habit) => {
+    const today = new Date().toISOString().split('T')[0];
+    return habit.completedDates?.includes(today);
+  };
+
+  const totalStreak = habits.reduce((sum, habit) => sum + habit.streak, 0);
+  const completedToday = habits.filter((habit) => isCompletedToday(habit)).length;
+  const pendingToday = habits.length - completedToday;
+
+  const getRoastEmoji = (level: string) => {
+    switch (level) {
+      case 'mild': return '😊';
+      case 'medium': return '😈';
+      case 'savage': return '💀';
+      default: return '🔥';
+    }
+  };
 
   return (
     <Page back={false}>
@@ -75,10 +111,63 @@ export const IndexPage = () => {
               👋 Welcome, <strong>{user.firstName || 'Roast Seeker'}</strong>!
             </p>
             <p style={{ margin: 0, color: 'var(--tg-theme-hint-color, #666)', fontSize: '14px' }}>
-              Ready to get roasted? 🔥
+              {habits.length === 0
+                ? "Ready to get roasted? Create your first habit! 🔥"
+                : pendingToday > 0
+                  ? `You have ${pendingToday} habit${pendingToday > 1 ? 's' : ''} pending today! 🔥`
+                  : "All habits completed today! 🎉"
+              }
             </p>
           </div>
         )}
+
+        {/* Quick Stats */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr 1fr',
+          gap: '10px',
+          marginBottom: '20px'
+        }}>
+          <div style={{
+            background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
+            padding: '12px',
+            borderRadius: '10px',
+            textAlign: 'center'
+          }}>
+            <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--tg-theme-button-color, #FF6B35)' }}>
+              {habits.length}
+            </div>
+            <div style={{ fontSize: '12px', color: 'var(--tg-theme-hint-color, #666)' }}>
+              Habits
+            </div>
+          </div>
+          <div style={{
+            background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
+            padding: '12px',
+            borderRadius: '10px',
+            textAlign: 'center'
+          }}>
+            <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--tg-theme-button-color, #FF6B35)' }}>
+              {totalStreak}
+            </div>
+            <div style={{ fontSize: '12px', color: 'var(--tg-theme-hint-color, #666)' }}>
+              Total Streak
+            </div>
+          </div>
+          <div style={{
+            background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
+            padding: '12px',
+            borderRadius: '10px',
+            textAlign: 'center'
+          }}>
+            <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--tg-theme-button-color, #FF6B35)' }}>
+              {completedToday}
+            </div>
+            <div style={{ fontSize: '12px', color: 'var(--tg-theme-hint-color, #666)' }}>
+              Done Today
+            </div>
+          </div>
+        </div>
 
         {/* Main Actions */}
         <div style={{
@@ -103,7 +192,24 @@ export const IndexPage = () => {
           </button>
 
           <button
-            onClick={() => alert('👥 Your accountability circle coming soon!')}
+            onClick={() => navigate('/habits')}
+            style={{
+              background: 'transparent',
+              color: 'var(--tg-theme-text-color, #1A1A1A)',
+              border: '2px solid var(--tg-theme-button-color, #FF6B35)',
+              padding: '16px',
+              borderRadius: '12px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              width: '100%'
+            }}
+          >
+            📋 My Habits {habits.length > 0 && `(${habits.length})`}
+          </button>
+
+          <button
+            onClick={() => navigate('/accountability-circle')}
             style={{
               background: 'transparent',
               color: 'var(--tg-theme-text-color, #1A1A1A)',
@@ -120,7 +226,7 @@ export const IndexPage = () => {
           </button>
 
           <button
-            onClick={() => alert(roasts[Math.floor(Math.random() * roasts.length)])}
+            onClick={() => alert(getRandomRoast())}
             style={{
               background: 'var(--tg-theme-text-color, #1A1A1A)',
               color: 'var(--tg-theme-bg-color, white)',
@@ -137,58 +243,119 @@ export const IndexPage = () => {
           </button>
         </div>
 
-        {/* Glory/Shame Feed Preview */}
-        <div style={{
-          marginTop: '30px',
-          padding: '15px',
-          background: 'var(--tg-theme-secondary-bg-color, #fafafa)',
-          borderRadius: '12px',
-          border: '1px solid var(--tg-theme-hint-color, #eee)'
-        }}>
-          <h3 style={{
-            margin: '0 0 10px 0',
-            color: 'var(--tg-theme-text-color, #1A1A1A)'
+        {/* Today's Progress */}
+        {habits.length > 0 && (
+          <div style={{
+            marginTop: '30px',
+            padding: '15px',
+            background: 'var(--tg-theme-secondary-bg-color, #fafafa)',
+            borderRadius: '12px',
+            border: '1px solid var(--tg-theme-hint-color, #eee)'
           }}>
-            Today's Glory/Shame
-          </h3>
-          <p style={{
-            color: 'var(--tg-theme-hint-color, #666)',
-            fontStyle: 'italic',
-            margin: 0
-          }}>
-            Your circle activity will appear here...
-          </p>
-        </div>
+            <h3 style={{
+              margin: '0 0 10px 0',
+              color: 'var(--tg-theme-text-color, #1A1A1A)'
+            }}>
+              Today's Progress
+            </h3>
+            {habits.slice(0, 3).map((habit) => (
+              <div
+                key={habit.id}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  padding: '8px 0',
+                  borderBottom: '1px solid var(--tg-theme-hint-color, #eee)',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span>{getRoastEmoji(habit.roastLevel)}</span>
+                  <span style={{ fontSize: '14px' }}>{habit.name}</span>
+                </div>
+                {isCompletedToday(habit) ? (
+                  <span style={{
+                    background: '#4CAF50',
+                    color: 'white',
+                    padding: '2px 8px',
+                    borderRadius: '10px',
+                    fontSize: '12px',
+                    fontWeight: 'bold',
+                  }}>
+                    ✓ Done
+                  </span>
+                ) : (
+                  <span style={{
+                    background: 'var(--tg-theme-button-color, #FF6B35)',
+                    color: 'white',
+                    padding: '2px 8px',
+                    borderRadius: '10px',
+                    fontSize: '12px',
+                    fontWeight: 'bold',
+                  }}>
+                    Pending
+                  </span>
+                )}
+              </div>
+            ))}
+            {habits.length > 3 && (
+              <button
+                onClick={() => navigate('/habits')}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: 'var(--tg-theme-button-color, #FF6B35)',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  marginTop: '10px',
+                  padding: '0',
+                  width: '100%',
+                  textAlign: 'center',
+                }}
+              >
+                View all {habits.length} habits →
+              </button>
+            )}
+          </div>
+        )}
 
-        {/* Quick Stats */}
+        {/* Empty State */}
+        {habits.length === 0 && (
+          <div style={{
+            marginTop: '30px',
+            padding: '30px 15px',
+            background: 'var(--tg-theme-secondary-bg-color, #fafafa)',
+            borderRadius: '12px',
+            border: '1px solid var(--tg-theme-hint-color, #eee)',
+            textAlign: 'center',
+          }}>
+            <div style={{ fontSize: '48px', marginBottom: '15px' }}>🎯</div>
+            <h3 style={{ margin: '0 0 10px 0' }}>No habits yet!</h3>
+            <p style={{ margin: 0, color: 'var(--tg-theme-hint-color, #666)', fontSize: '14px' }}>
+              Create your first habit and start getting roasted! 🔥
+            </p>
+          </div>
+        )}
+
+        {/* Motivational Quote */}
         <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '10px',
-          marginTop: '20px'
+          marginTop: '20px',
+          padding: '15px',
+          background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
+          borderRadius: '12px',
+          textAlign: 'center',
         }}>
-          <div style={{
-            background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
-            padding: '12px',
-            borderRadius: '10px',
-            textAlign: 'center'
+          <p style={{
+            margin: 0,
+            fontStyle: 'italic',
+            color: 'var(--tg-theme-hint-color, #666)',
+            fontSize: '14px',
           }}>
-            <div style={{ fontSize: '24px', marginBottom: '5px' }}>0</div>
-            <div style={{ fontSize: '14px', color: 'var(--tg-theme-hint-color, #666)' }}>
-              Current Streak
-            </div>
-          </div>
-          <div style={{
-            background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
-            padding: '12px',
-            borderRadius: '10px',
-            textAlign: 'center'
-          }}>
-            <div style={{ fontSize: '24px', marginBottom: '5px' }}>0</div>
-            <div style={{ fontSize: '14px', color: 'var(--tg-theme-hint-color, #666)' }}>
-              Habits Tracked
-            </div>
-          </div>
+            "{pendingToday > 0
+              ? `You have ${pendingToday} habit${pendingToday > 1 ? 's' : ''} to complete. Don't let your streak die! 🔥`
+              : 'All done! Your future self is proud. 🎉'
+            }"
+          </p>
         </div>
       </div>
     </Page>
