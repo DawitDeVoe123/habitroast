@@ -83,7 +83,7 @@ export const IndexPage = () => {
   };
 
   return (
-    <Page back={false}>
+    <Page back={true}>
       <div style={{
         padding: '20px',
         maxWidth: '400px',
