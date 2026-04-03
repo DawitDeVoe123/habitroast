@@ -14,6 +14,8 @@ import { StakePage } from '@/pages/StakePage/StakePage';
 import { InvitePage } from '@/pages/InvitePage/InvitePage';
 import { LeaderboardPage } from '@/pages/LeaderboardPage/LeaderboardPage';
 import { PremiumThemesPage } from '@/pages/PremiumThemesPage/PremiumThemesPage';
+import { CalendarPage } from '@/pages/CalendarPage/CalendarPage';
+import { ReportsPage } from '@/pages/ReportsPage/ReportsPage';
 
 interface Route {
   path: string;
@@ -33,6 +35,8 @@ export const routes: Route[] = [
   { path: '/invite', Component: InvitePage, title: 'Invite Friends' },
   { path: '/leaderboard', Component: LeaderboardPage, title: 'Leaderboard' },
   { path: '/premium-themes', Component: PremiumThemesPage, title: 'Premium Themes' },
+  { path: '/calendar', Component: CalendarPage, title: 'Calendar' },
+  { path: '/reports', Component: ReportsPage, title: 'Reports' },
   { path: '/init-data', Component: InitDataPage, title: 'Init Data' },
   { path: '/theme-params', Component: ThemeParamsPage, title: 'Theme Params' },
   { path: '/launch-params', Component: LaunchParamsPage, title: 'Launch Params' },
