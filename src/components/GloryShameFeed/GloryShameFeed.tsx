@@ -191,11 +191,11 @@ export const GloryShameFeed = () => {
                             <div style={{
                                 marginTop: '6px',
                                 display: 'inline-block',
-                                background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
+                                background: 'var(--hr-bg-elevated)',
                                 padding: '2px 8px',
                                 borderRadius: '10px',
                                 fontSize: '12px',
-                                color: 'var(--tg-theme-button-color, #FF6B35)',
+                                color: 'var(--hr-primary-light)',
                                 fontWeight: 'bold',
                             }}>
                                 🔥 {item.streak} day streak

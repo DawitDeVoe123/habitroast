@@ -206,8 +206,8 @@ export const StreakSavior = () => {
                                 borderRadius: '6px',
                                 border: 'none',
                                 background: !selectedFriend || getAvailableFriends(selectedHabit).length === 0
-                                    ? 'var(--tg-theme-hint-color, #ccc)'
-                                    : 'var(--tg-theme-button-color, #FF6B35)',
+                                    ? 'var(--hr-bg-elevated)'
+                                    : 'var(--hr-primary)',
                                 color: 'var(--tg-theme-button-text-color, white)',
                                 cursor: !selectedFriend || getAvailableFriends(selectedHabit).length === 0 ? 'not-allowed' : 'pointer',
                                 fontSize: '14px',

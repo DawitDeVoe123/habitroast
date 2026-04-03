@@ -326,3 +326,16 @@ body {
     background: var(--hr-primary);
     color: white;
 }
+
+/* ============================================
+   Telegram Theme Override - Makes all fallback colors use our theme
+   ============================================ */
+:root {
+    /* Override Telegram's default button color fallback */
+    --tg-theme-button-color: var(--hr-primary) !important;
+    --tg-theme-button-text-color: white !important;
+    --tg-theme-bg-color: var(--hr-bg-primary) !important;
+    --tg-theme-secondary-bg-color: var(--hr-bg-card) !important;
+    --tg-theme-text-color: var(--hr-text-primary) !important;
+    --tg-theme-hint-color: var(--hr-text-secondary) !important;
+}

@@ -150,7 +150,7 @@ export const CirclePage = () => {
                         style={{
                             background: 'none',
                             border: 'none',
-                            color: 'var(--tg-theme-button-color, #FF6B35)',
+                            color: 'var(--hr-primary-light)',
                             cursor: 'pointer',
                             fontSize: '14px',
                             marginBottom: '20px',
@@ -225,8 +225,8 @@ export const CirclePage = () => {
                                             padding: '12px 16px',
                                             borderRadius: '8px',
                                             border: 'none',
-                                            background: 'var(--tg-theme-button-color, #FF6B35)',
-                                            color: 'var(--tg-theme-button-text-color, white)',
+                                            background: 'var(--hr-primary)',
+                                            color: 'white',
                                             cursor: 'pointer',
                                             fontSize: '14px',
                                             fontWeight: 'bold',
@@ -271,7 +271,7 @@ export const CirclePage = () => {
                                                     <button
                                                         onClick={() => nudgeMember(member.username)}
                                                         style={{
-                                                            background: 'var(--tg-theme-button-color, #FF6B35)',
+                                                            background: 'var(--hr-primary)',
                                                             color: 'white',
                                                             border: 'none',
                                                             padding: '6px 12px',
@@ -291,41 +291,44 @@ export const CirclePage = () => {
                                                     marginTop: '8px',
                                                 }}>
                                                     <div style={{
-                                                        background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
+                                                        background: 'var(--hr-bg-card)',
                                                         padding: '8px',
                                                         borderRadius: '6px',
                                                         textAlign: 'center',
+                                                        border: '1px solid rgba(139, 92, 246, 0.2)',
                                                     }}>
-                                                        <div style={{ fontSize: '16px', fontWeight: 'bold', color: 'var(--tg-theme-button-color, #FF6B35)' }}>
+                                                        <div style={{ fontSize: '16px', fontWeight: 'bold', color: 'var(--hr-primary-light)' }}>
                                                             {stats.totalStreak}
                                                         </div>
-                                                        <div style={{ fontSize: '10px', color: 'var(--tg-theme-hint-color, #666)' }}>
+                                                        <div style={{ fontSize: '10px', color: 'var(--hr-text-secondary)' }}>
                                                             Streak
                                                         </div>
                                                     </div>
                                                     <div style={{
-                                                        background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
+                                                        background: 'var(--hr-bg-card)',
                                                         padding: '8px',
                                                         borderRadius: '6px',
                                                         textAlign: 'center',
+                                                        border: '1px solid rgba(139, 92, 246, 0.2)',
                                                     }}>
-                                                        <div style={{ fontSize: '16px', fontWeight: 'bold', color: 'var(--tg-theme-button-color, #FF6B35)' }}>
+                                                        <div style={{ fontSize: '16px', fontWeight: 'bold', color: 'var(--hr-primary-light)' }}>
                                                             {stats.completedToday}
                                                         </div>
-                                                        <div style={{ fontSize: '10px', color: 'var(--tg-theme-hint-color, #666)' }}>
+                                                        <div style={{ fontSize: '10px', color: 'var(--hr-text-secondary)' }}>
                                                             Today
                                                         </div>
                                                     </div>
                                                     <div style={{
-                                                        background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
+                                                        background: 'var(--hr-bg-card)',
                                                         padding: '8px',
                                                         borderRadius: '6px',
                                                         textAlign: 'center',
+                                                        border: '1px solid rgba(139, 92, 246, 0.2)',
                                                     }}>
-                                                        <div style={{ fontSize: '16px', fontWeight: 'bold', color: 'var(--tg-theme-button-color, #FF6B35)' }}>
+                                                        <div style={{ fontSize: '16px', fontWeight: 'bold', color: 'var(--hr-primary-light)' }}>
                                                             {stats.totalHabits}
                                                         </div>
-                                                        <div style={{ fontSize: '10px', color: 'var(--tg-theme-hint-color, #666)' }}>
+                                                        <div style={{ fontSize: '10px', color: 'var(--hr-text-secondary)' }}>
                                                             Habits
                                                         </div>
                                                     </div>
@@ -380,28 +383,30 @@ export const CirclePage = () => {
                     marginBottom: '20px',
                 }}>
                     <div style={{
-                        background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
+                        background: 'var(--hr-bg-card)',
                         padding: '12px',
                         borderRadius: '10px',
                         textAlign: 'center',
+                        border: '1px solid rgba(139, 92, 246, 0.2)',
                     }}>
-                        <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--tg-theme-button-color, #FF6B35)' }}>
+                        <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--hr-primary-light)' }}>
                             {circles.length}
                         </div>
-                        <div style={{ fontSize: '12px', color: 'var(--tg-theme-hint-color, #666)' }}>
+                        <div style={{ fontSize: '12px', color: 'var(--hr-text-secondary)' }}>
                             Circles
                         </div>
                     </div>
                     <div style={{
-                        background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
+                        background: 'var(--hr-bg-card)',
                         padding: '12px',
                         borderRadius: '10px',
                         textAlign: 'center',
+                        border: '1px solid rgba(139, 92, 246, 0.2)',
                     }}>
-                        <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--tg-theme-button-color, #FF6B35)' }}>
+                        <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--hr-primary-light)' }}>
                             {circles.reduce((sum, c) => sum + c.members.length, 0)}
                         </div>
-                        <div style={{ fontSize: '12px', color: 'var(--tg-theme-hint-color, #666)' }}>
+                        <div style={{ fontSize: '12px', color: 'var(--hr-text-secondary)' }}>
                             Total Members
                         </div>
                     </div>
@@ -410,10 +415,11 @@ export const CirclePage = () => {
                 {/* Create Circle */}
                 {showCreateForm ? (
                     <div style={{
-                        background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
+                        background: 'var(--hr-bg-card)',
                         padding: '16px',
                         borderRadius: '12px',
                         marginBottom: '20px',
+                        border: '1px solid rgba(139, 92, 246, 0.2)',
                     }}>
                         <label style={{
                             display: 'block',
@@ -447,8 +453,8 @@ export const CirclePage = () => {
                                     padding: '12px 16px',
                                     borderRadius: '8px',
                                     border: 'none',
-                                    background: 'var(--tg-theme-button-color, #FF6B35)',
-                                    color: 'var(--tg-theme-button-text-color, white)',
+                                    background: 'var(--hr-primary)',
+                                    color: 'white',
                                     cursor: 'pointer',
                                     fontSize: '14px',
                                     fontWeight: 'bold',
@@ -462,7 +468,7 @@ export const CirclePage = () => {
                             style={{
                                 background: 'none',
                                 border: 'none',
-                                color: 'var(--tg-theme-hint-color, #666)',
+                                color: 'var(--hr-text-secondary)',
                                 cursor: 'pointer',
                                 fontSize: '14px',
                                 padding: '0',
@@ -481,9 +487,9 @@ export const CirclePage = () => {
                             borderRadius: '12px',
                             border: 'none',
                             background: circles.length >= 5
-                                ? 'var(--tg-theme-hint-color, #ccc)'
-                                : 'var(--tg-theme-button-color, #FF6B35)',
-                            color: 'var(--tg-theme-button-text-color, white)',
+                                ? 'var(--hr-bg-elevated)'
+                                : 'var(--hr-primary)',
+                            color: 'white',
                             fontSize: '16px',
                             fontWeight: 'bold',
                             cursor: circles.length >= 5 ? 'not-allowed' : 'pointer',
@@ -523,13 +529,13 @@ export const CirclePage = () => {
                             >
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                                     <div>
-                                        <h3 style={{ margin: '0 0 5px 0', fontSize: '16px' }}>👥 {circle.name}</h3>
-                                        <p style={{ margin: 0, fontSize: '12px', color: 'var(--tg-theme-hint-color, #666)' }}>
+                                        <h3 style={{ margin: '0 0 5px 0', fontSize: '16px', color: 'var(--hr-text-primary)' }}>👥 {circle.name}</h3>
+                                        <p style={{ margin: 0, fontSize: '12px', color: 'var(--hr-text-secondary)' }}>
                                             {circle.members.length}/{circle.maxMembers} members
                                         </p>
                                     </div>
                                     <span style={{
-                                        background: 'var(--tg-theme-button-color, #FF6B35)',
+                                        background: 'var(--hr-primary)',
                                         color: 'white',
                                         padding: '4px 8px',
                                         borderRadius: '12px',

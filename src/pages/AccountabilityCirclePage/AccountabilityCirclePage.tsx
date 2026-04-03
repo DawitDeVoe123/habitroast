@@ -120,8 +120,8 @@ export const AccountabilityCirclePage = () => {
                                 padding: '12px 16px',
                                 borderRadius: '8px',
                                 border: 'none',
-                                background: 'var(--tg-theme-button-color, #FF6B35)',
-                                color: 'var(--tg-theme-button-text-color, white)',
+                                background: 'var(--hr-primary)',
+                                color: 'white',
                                 cursor: 'pointer',
                                 fontSize: '14px',
                                 fontWeight: 'bold',
@@ -140,28 +140,30 @@ export const AccountabilityCirclePage = () => {
                     marginBottom: '20px',
                 }}>
                     <div style={{
-                        background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
+                        background: 'var(--hr-bg-card)',
                         padding: '12px',
                         borderRadius: '10px',
                         textAlign: 'center',
+                        border: '1px solid rgba(139, 92, 246, 0.2)',
                     }}>
-                        <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--tg-theme-button-color, #FF6B35)' }}>
+                        <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--hr-primary-light)' }}>
                             {friends.length}
                         </div>
-                        <div style={{ fontSize: '12px', color: 'var(--tg-theme-hint-color, #666)' }}>
+                        <div style={{ fontSize: '12px', color: 'var(--hr-text-secondary)' }}>
                             Friends
                         </div>
                     </div>
                     <div style={{
-                        background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
+                        background: 'var(--hr-bg-card)',
                         padding: '12px',
                         borderRadius: '10px',
                         textAlign: 'center',
+                        border: '1px solid rgba(139, 92, 246, 0.2)',
                     }}>
-                        <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--tg-theme-button-color, #FF6B35)' }}>
+                        <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--hr-primary-light)' }}>
                             {habits.filter((h) => h.accountabilityCircle.length > 0).length}
                         </div>
-                        <div style={{ fontSize: '12px', color: 'var(--tg-theme-hint-color, #666)' }}>
+                        <div style={{ fontSize: '12px', color: 'var(--hr-text-secondary)' }}>
                             Shared Habits
                         </div>
                     </div>
