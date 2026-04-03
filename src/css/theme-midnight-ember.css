@@ -1,0 +1,328 @@
+/* ===========================================
+   HabitRoast - Midnight Ember Theme
+   A dark purple/crimson aesthetic with ember accents
+   =========================================== */
+
+:root {
+    /* Primary Brand Colors - Midnight Ember */
+    --hr-primary: #8B5CF6;
+    /* Violet */
+    --hr-primary-dark: #7C3AED;
+    /* Deep Violet */
+    --hr-primary-light: #A78BFA;
+    /* Light Violet */
+
+    /* Accent Colors - Ember */
+    --hr-accent: #EF4444;
+    /* Crimson Red */
+    --hr-accent-warm: #F97316;
+    /* Ember Orange (for fire elements only) */
+    --hr-accent-gold: #FBBF24;
+    /* Gold for achievements */
+
+    /* Background Colors - Dark Theme */
+    --hr-bg-primary: #0F0A1A;
+    /* Deep Purple-Black */
+    --hr-bg-secondary: #1A1025;
+    /* Dark Purple */
+    --hr-bg-card: #251830;
+    /* Card Background */
+    --hr-bg-elevated: #2D2240;
+    /* Elevated Surfaces */
+
+    /* Text Colors */
+    --hr-text-primary: #F8FAFC;
+    /* White */
+    --hr-text-secondary: #A1A1AA;
+    /* Gray */
+    --hr-text-muted: #71717A;
+    /* Muted Gray */
+
+    /* Semantic Colors */
+    --hr-success: #10B981;
+    /* Emerald Green */
+    --hr-warning: #F59E0B;
+    /* Amber */
+    --hr-error: #EF4444;
+    /* Red */
+
+    /* Gradients */
+    --hr-gradient-primary: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+    --hr-gradient-ember: linear-gradient(135deg, #EF4444 0%, #F97316 100%);
+    --hr-gradient-gold: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
+    --hr-gradient-midnight: linear-gradient(180deg, #0F0A1A 0%, #1A1025 100%);
+
+    /* Shadows */
+    --hr-shadow-sm: 0 2px 8px rgba(139, 92, 246, 0.2);
+    --hr-shadow-md: 0 4px 16px rgba(139, 92, 246, 0.3);
+    --hr-shadow-lg: 0 8px 32px rgba(139, 92, 246, 0.4);
+    --hr-shadow-glow: 0 0 20px rgba(139, 92, 246, 0.5);
+
+    /* Border Radius */
+    --hr-radius-sm: 8px;
+    --hr-radius-md: 12px;
+    --hr-radius-lg: 16px;
+    --hr-radius-xl: 24px;
+    --hr-radius-full: 9999px;
+}
+
+/* Base Styles */
+body {
+    background: var(--hr-bg-primary);
+    color: var(--hr-text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+}
+
+/* Card Styles */
+.hr-card {
+    background: var(--hr-bg-card);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--hr-radius-md);
+    padding: 16px;
+    box-shadow: var(--hr-shadow-sm);
+}
+
+.hr-card-elevated {
+    background: var(--hr-bg-elevated);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--hr-radius-lg);
+    padding: 20px;
+    box-shadow: var(--hr-shadow-md);
+}
+
+/* Button Styles */
+.hr-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 24px;
+    border-radius: var(--hr-radius-md);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.hr-btn-primary {
+    background: var(--hr-gradient-primary);
+    color: white;
+    box-shadow: var(--hr-shadow-sm);
+}
+
+.hr-btn-primary:hover {
+    box-shadow: var(--hr-shadow-glow);
+    transform: translateY(-2px);
+}
+
+.hr-btn-secondary {
+    background: transparent;
+    color: var(--hr-primary-light);
+    border: 2px solid var(--hr-primary);
+}
+
+.hr-btn-secondary:hover {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: var(--hr-primary-light);
+}
+
+.hr-btn-accent {
+    background: var(--hr-gradient-ember);
+    color: white;
+}
+
+.hr-btn-accent:hover {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Stat Card */
+.hr-stat {
+    background: var(--hr-bg-card);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--hr-radius-md);
+    padding: 16px;
+    text-align: center;
+}
+
+.hr-stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    background: var(--hr-gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hr-stat-label {
+    font-size: 12px;
+    color: var(--hr-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Progress Badge */
+.hr-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: var(--hr-radius-full);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.hr-badge-success {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--hr-success);
+}
+
+.hr-badge-pending {
+    background: rgba(249, 115, 22, 0.2);
+    color: var(--hr-accent-warm);
+}
+
+.hr-badge-gold {
+    background: rgba(251, 191, 36, 0.2);
+    color: var(--hr-accent-gold);
+}
+
+/* Input Styles */
+.hr-input {
+    background: var(--hr-bg-elevated);
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--hr-radius-md);
+    padding: 12px 16px;
+    font-size: 16px;
+    color: var(--hr-text-primary);
+    width: 100%;
+    transition: border-color 0.2s ease;
+}
+
+.hr-input:focus {
+    outline: none;
+    border-color: var(--hr-primary);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+}
+
+/* Section Header */
+.hr-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.hr-header-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--hr-gradient-primary);
+    border-radius: var(--hr-radius-md);
+    font-size: 24px;
+}
+
+.hr-header-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.hr-header-subtitle {
+    font-size: 14px;
+    color: var(--hr-text-secondary);
+    margin: 4px 0 0 0;
+}
+
+/* Divider */
+.hr-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), transparent);
+    margin: 24px 0;
+}
+
+/* Glow Effect */
+.hr-glow {
+    position: relative;
+}
+
+.hr-glow::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    background: var(--hr-gradient-primary);
+    border-radius: inherit;
+    filter: blur(12px);
+    opacity: 0.5;
+    z-index: -1;
+}
+
+/* Animations */
+@keyframes hr-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes hr-shine {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.hr-animate-pulse {
+    animation: hr-pulse 2s ease-in-out infinite;
+}
+
+.hr-animate-shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.hr-animate-shine::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: hr-shine 2s ease-in-out infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--hr-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--hr-primary-dark);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--hr-primary);
+}
+
+/* Selection */
+::selection {
+    background: var(--hr-primary);
+    color: white;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './components/App';
 import './index.css';
+import './css/theme-midnight-ember.css';
 import { mockEnvReady } from './mockEnv';
 import { init } from './init';
 

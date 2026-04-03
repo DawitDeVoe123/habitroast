@@ -88,31 +88,48 @@ export const IndexPage = () => {
         padding: '20px',
         maxWidth: '400px',
         margin: '0 auto',
-        fontFamily: 'system-ui, -apple-system, sans-serif'
+        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        background: 'var(--hr-bg-primary)',
+        minHeight: '100vh',
       }}>
         {/* Header */}
         <header style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '10px',
-          marginBottom: '30px'
+          gap: '12px',
+          marginBottom: '30px',
+          padding: '16px',
+          background: 'var(--hr-gradient-midnight)',
+          borderRadius: '16px',
+          border: '1px solid rgba(139, 92, 246, 0.3)',
         }}>
-          <span style={{ fontSize: '40px' }}>🔥</span>
-          <h1 style={{ margin: 0 }}>HabitRoast</h1>
+          <span style={{
+            fontSize: '42px',
+            background: 'var(--hr-gradient-primary)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}>🔥</span>
+          <div>
+            <h1 style={{ margin: 0, fontSize: '26px', color: 'var(--hr-text-primary)' }}>HabitRoast</h1>
+            <p style={{ margin: '4px 0 0 0', fontSize: '12px', color: 'var(--hr-primary-light)' }}>Midnight Ember Edition</p>
+          </div>
         </header>
 
         {/* Welcome Card */}
         {user && (
           <div style={{
-            background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
-            padding: '15px',
-            borderRadius: '12px',
-            marginBottom: '20px'
+            background: 'var(--hr-bg-card)',
+            padding: '18px',
+            borderRadius: '16px',
+            marginBottom: '20px',
+            border: '1px solid rgba(139, 92, 246, 0.2)',
+            boxShadow: 'var(--hr-shadow-sm)',
           }}>
-            <p style={{ margin: '0 0 5px 0' }}>
-              👋 Welcome, <strong>{user.firstName || 'Roast Seeker'}</strong>!
+            <p style={{ margin: '0 0 8px 0', fontSize: '16px' }}>
+              👋 Welcome, <strong style={{ color: 'var(--hr-primary-light)' }}>{user.firstName || 'Roast Seeker'}</strong>!
             </p>
-            <p style={{ margin: 0, color: 'var(--tg-theme-hint-color, #666)', fontSize: '14px' }}>
+            <p style={{ margin: 0, color: 'var(--hr-text-secondary)', fontSize: '14px' }}>
               {habits.length === 0
                 ? "Ready to get roasted? Create your first habit! 🔥"
                 : pendingToday > 0
@@ -127,45 +144,48 @@ export const IndexPage = () => {
         <div style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr 1fr',
-          gap: '10px',
-          marginBottom: '20px'
+          gap: '12px',
+          marginBottom: '24px'
         }}>
           <div style={{
-            background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
-            padding: '12px',
-            borderRadius: '10px',
-            textAlign: 'center'
+            background: 'var(--hr-bg-card)',
+            padding: '16px',
+            borderRadius: '14px',
+            textAlign: 'center',
+            border: '1px solid rgba(139, 92, 246, 0.2)',
           }}>
-            <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--tg-theme-button-color, #FF6B35)' }}>
+            <div style={{ fontSize: '28px', fontWeight: 'bold', background: 'var(--hr-gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               {habits.length}
             </div>
-            <div style={{ fontSize: '12px', color: 'var(--tg-theme-hint-color, #666)' }}>
+            <div style={{ fontSize: '11px', color: 'var(--hr-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               Habits
             </div>
           </div>
           <div style={{
-            background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
-            padding: '12px',
-            borderRadius: '10px',
-            textAlign: 'center'
+            background: 'var(--hr-bg-card)',
+            padding: '16px',
+            borderRadius: '14px',
+            textAlign: 'center',
+            border: '1px solid rgba(139, 92, 246, 0.2)',
           }}>
-            <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--tg-theme-button-color, #FF6B35)' }}>
+            <div style={{ fontSize: '28px', fontWeight: 'bold', background: 'var(--hr-gradient-ember)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               {totalStreak}
             </div>
-            <div style={{ fontSize: '12px', color: 'var(--tg-theme-hint-color, #666)' }}>
+            <div style={{ fontSize: '11px', color: 'var(--hr-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               Total Streak
             </div>
           </div>
           <div style={{
-            background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
-            padding: '12px',
-            borderRadius: '10px',
-            textAlign: 'center'
+            background: 'var(--hr-bg-card)',
+            padding: '16px',
+            borderRadius: '14px',
+            textAlign: 'center',
+            border: '1px solid rgba(139, 92, 246, 0.2)',
           }}>
-            <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--tg-theme-button-color, #FF6B35)' }}>
+            <div style={{ fontSize: '28px', fontWeight: 'bold', background: 'var(--hr-gradient-gold)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               {completedToday}
             </div>
-            <div style={{ fontSize: '12px', color: 'var(--tg-theme-hint-color, #666)' }}>
+            <div style={{ fontSize: '11px', color: 'var(--hr-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               Done Today
             </div>
           </div>
@@ -174,20 +194,22 @@ export const IndexPage = () => {
         {/* Main Actions */}
         <div style={{
           display: 'grid',
-          gap: '12px'
+          gap: '14px'
         }}>
           <button
             onClick={() => navigate('/create-habit')}
             style={{
-              background: 'var(--tg-theme-button-color, #FF6B35)',
-              color: 'var(--tg-theme-button-text-color, white)',
+              background: 'var(--hr-gradient-primary)',
+              color: 'white',
               border: 'none',
-              padding: '16px',
-              borderRadius: '12px',
+              padding: '18px',
+              borderRadius: '14px',
               fontSize: '16px',
               fontWeight: 'bold',
               cursor: 'pointer',
-              width: '100%'
+              width: '100%',
+              boxShadow: 'var(--hr-shadow-sm)',
+              transition: 'all 0.2s ease',
             }}
           >
             ➕ Create New Habit
@@ -197,14 +219,14 @@ export const IndexPage = () => {
             onClick={() => navigate('/habits')}
             style={{
               background: 'transparent',
-              color: 'var(--tg-theme-text-color, #1A1A1A)',
-              border: '2px solid var(--tg-theme-button-color, #FF6B35)',
+              color: 'var(--hr-primary-light)',
+              border: '2px solid var(--hr-primary)',
               padding: '16px',
-              borderRadius: '12px',
+              borderRadius: '14px',
               fontSize: '16px',
               fontWeight: 'bold',
               cursor: 'pointer',
-              width: '100%'
+              width: '100%',
             }}
           >
             📋 My Habits {habits.length > 0 && `(${habits.length})`}
@@ -214,14 +236,14 @@ export const IndexPage = () => {
             onClick={() => navigate('/accountability-circle')}
             style={{
               background: 'transparent',
-              color: 'var(--tg-theme-text-color, #1A1A1A)',
-              border: '2px solid var(--tg-theme-button-color, #FF6B35)',
+              color: 'var(--hr-primary-light)',
+              border: '2px solid var(--hr-primary)',
               padding: '16px',
-              borderRadius: '12px',
+              borderRadius: '14px',
               fontSize: '16px',
               fontWeight: 'bold',
               cursor: 'pointer',
-              width: '100%'
+              width: '100%',
             }}
           >
             👥 My Accountability Circle
@@ -231,14 +253,14 @@ export const IndexPage = () => {
             onClick={() => navigate('/circles')}
             style={{
               background: 'transparent',
-              color: 'var(--tg-theme-text-color, #1A1A1A)',
-              border: '2px solid var(--tg-theme-button-color, #FF6B35)',
+              color: 'var(--hr-primary-light)',
+              border: '2px solid var(--hr-primary)',
               padding: '16px',
-              borderRadius: '12px',
+              borderRadius: '14px',
               fontSize: '16px',
               fontWeight: 'bold',
               cursor: 'pointer',
-              width: '100%'
+              width: '100%',
             }}
           >
             👥 Accountability Circles
@@ -248,14 +270,14 @@ export const IndexPage = () => {
             onClick={() => navigate('/streak-battles')}
             style={{
               background: 'transparent',
-              color: 'var(--tg-theme-text-color, #1A1A1A)',
-              border: '2px solid var(--tg-theme-button-color, #FF6B35)',
+              color: 'var(--hr-primary-light)',
+              border: '2px solid var(--hr-primary)',
               padding: '16px',
-              borderRadius: '12px',
+              borderRadius: '14px',
               fontSize: '16px',
               fontWeight: 'bold',
               cursor: 'pointer',
-              width: '100%'
+              width: '100%',
             }}
           >
             ⚔️ Streak Battles
@@ -265,14 +287,14 @@ export const IndexPage = () => {
             onClick={() => navigate('/stake')}
             style={{
               background: 'transparent',
-              color: 'var(--tg-theme-text-color, #1A1A1A)',
-              border: '2px solid var(--tg-theme-button-color, #FF6B35)',
+              color: 'var(--hr-primary-light)',
+              border: '2px solid var(--hr-primary)',
               padding: '16px',
-              borderRadius: '12px',
+              borderRadius: '14px',
               fontSize: '16px',
               fontWeight: 'bold',
               cursor: 'pointer',
-              width: '100%'
+              width: '100%',
             }}
           >
             ⭐ Stake & Roast
@@ -282,14 +304,14 @@ export const IndexPage = () => {
             onClick={() => navigate('/invite')}
             style={{
               background: 'transparent',
-              color: 'var(--tg-theme-text-color, #1A1A1A)',
-              border: '2px solid var(--tg-theme-button-color, #FF6B35)',
+              color: 'var(--hr-primary-light)',
+              border: '2px solid var(--hr-primary)',
               padding: '16px',
-              borderRadius: '12px',
+              borderRadius: '14px',
               fontSize: '16px',
               fontWeight: 'bold',
               cursor: 'pointer',
-              width: '100%'
+              width: '100%',
             }}
           >
             🎁 Invite to Unlock
@@ -299,14 +321,14 @@ export const IndexPage = () => {
             onClick={() => navigate('/leaderboard')}
             style={{
               background: 'transparent',
-              color: 'var(--tg-theme-text-color, #1A1A1A)',
-              border: '2px solid var(--tg-theme-button-color, #FF6B35)',
+              color: 'var(--hr-primary-light)',
+              border: '2px solid var(--hr-primary)',
               padding: '16px',
-              borderRadius: '12px',
+              borderRadius: '14px',
               fontSize: '16px',
               fontWeight: 'bold',
               cursor: 'pointer',
-              width: '100%'
+              width: '100%',
             }}
           >
             🏆 Leaderboard
@@ -316,14 +338,14 @@ export const IndexPage = () => {
             onClick={() => navigate('/premium-themes')}
             style={{
               background: 'transparent',
-              color: 'var(--tg-theme-text-color, #1A1A1A)',
-              border: '2px solid var(--tg-theme-button-color, #FF6B35)',
+              color: 'var(--hr-primary-light)',
+              border: '2px solid var(--hr-primary)',
               padding: '16px',
-              borderRadius: '12px',
+              borderRadius: '14px',
               fontSize: '16px',
               fontWeight: 'bold',
               cursor: 'pointer',
-              width: '100%'
+              width: '100%',
             }}
           >
             🎨 Premium Themes
@@ -332,15 +354,16 @@ export const IndexPage = () => {
           <button
             onClick={() => alert(getRandomRoast())}
             style={{
-              background: 'var(--tg-theme-text-color, #1A1A1A)',
-              color: 'var(--tg-theme-bg-color, white)',
+              background: 'var(--hr-gradient-ember)',
+              color: 'white',
               border: 'none',
-              padding: '16px',
-              borderRadius: '12px',
+              padding: '18px',
+              borderRadius: '14px',
               fontSize: '16px',
               fontWeight: 'bold',
               cursor: 'pointer',
-              width: '100%'
+              width: '100%',
+              boxShadow: '0 4px 16px rgba(239, 68, 68, 0.3)',
             }}
           >
             🔥 Roast Me Now
@@ -351,16 +374,20 @@ export const IndexPage = () => {
         {habits.length > 0 && (
           <div style={{
             marginTop: '30px',
-            padding: '15px',
-            background: 'var(--tg-theme-secondary-bg-color, #fafafa)',
-            borderRadius: '12px',
-            border: '1px solid var(--tg-theme-hint-color, #eee)'
+            padding: '18px',
+            background: 'var(--hr-bg-card)',
+            borderRadius: '16px',
+            border: '1px solid rgba(139, 92, 246, 0.2)',
           }}>
             <h3 style={{
-              margin: '0 0 10px 0',
-              color: 'var(--tg-theme-text-color, #1A1A1A)'
+              margin: '0 0 16px 0',
+              color: 'var(--hr-text-primary)',
+              fontSize: '16px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
             }}>
-              Today's Progress
+              <span>📊</span> Today's Progress
             </h3>
             {habits.slice(0, 3).map((habit) => (
               <div
@@ -369,23 +396,29 @@ export const IndexPage = () => {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  padding: '8px 0',
-                  borderBottom: '1px solid var(--tg-theme-hint-color, #eee)',
+                  padding: '12px 0',
+                  borderBottom: '1px solid rgba(139, 92, 246, 0.1)',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span>{getRoastEmoji(habit.roastLevel)}</span>
-                  <span style={{ fontSize: '14px' }}>{habit.name}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span style={{ fontSize: '20px' }}>{getRoastEmoji(habit.roastLevel)}</span>
+                  <span style={{ fontSize: '15px', color: 'var(--hr-text-primary)' }}>{habit.name}</span>
                   {habit.stakeAmount && habit.stakeAmount > 0 && (
-                    <span style={{ fontSize: '12px', color: '#FF6B35' }}>⭐{habit.stakeAmount}</span>
+                    <span style={{
+                      fontSize: '12px',
+                      color: 'var(--hr-accent-gold)',
+                      background: 'rgba(251, 191, 36, 0.15)',
+                      padding: '2px 8px',
+                      borderRadius: '8px',
+                    }}>⭐{habit.stakeAmount}</span>
                   )}
                 </div>
                 {isCompletedToday(habit) ? (
                   <span style={{
-                    background: '#4CAF50',
-                    color: 'white',
-                    padding: '2px 8px',
-                    borderRadius: '10px',
+                    background: 'rgba(16, 185, 129, 0.2)',
+                    color: 'var(--hr-success)',
+                    padding: '4px 12px',
+                    borderRadius: '12px',
                     fontSize: '12px',
                     fontWeight: 'bold',
                   }}>
@@ -393,10 +426,10 @@ export const IndexPage = () => {
                   </span>
                 ) : (
                   <span style={{
-                    background: 'var(--tg-theme-button-color, #FF6B35)',
-                    color: 'white',
-                    padding: '2px 8px',
-                    borderRadius: '10px',
+                    background: 'rgba(249, 115, 22, 0.2)',
+                    color: 'var(--hr-accent-warm)',
+                    padding: '4px 12px',
+                    borderRadius: '12px',
                     fontSize: '12px',
                     fontWeight: 'bold',
                   }}>
@@ -411,13 +444,14 @@ export const IndexPage = () => {
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: 'var(--tg-theme-button-color, #FF6B35)',
+                  color: 'var(--hr-primary-light)',
                   cursor: 'pointer',
                   fontSize: '14px',
-                  marginTop: '10px',
+                  marginTop: '12px',
                   padding: '0',
                   width: '100%',
                   textAlign: 'center',
+                  fontWeight: '600',
                 }}
               >
                 View all {habits.length} habits →
@@ -430,15 +464,22 @@ export const IndexPage = () => {
         {habits.length === 0 && (
           <div style={{
             marginTop: '30px',
-            padding: '30px 15px',
-            background: 'var(--tg-theme-secondary-bg-color, #fafafa)',
-            borderRadius: '12px',
-            border: '1px solid var(--tg-theme-hint-color, #eee)',
+            padding: '40px 20px',
+            background: 'var(--hr-bg-card)',
+            borderRadius: '16px',
+            border: '1px solid rgba(139, 92, 246, 0.2)',
             textAlign: 'center',
           }}>
-            <div style={{ fontSize: '48px', marginBottom: '15px' }}>🎯</div>
-            <h3 style={{ margin: '0 0 10px 0' }}>No habits yet!</h3>
-            <p style={{ margin: 0, color: 'var(--tg-theme-hint-color, #666)', fontSize: '14px' }}>
+            <div style={{
+              fontSize: '56px',
+              marginBottom: '20px',
+              background: 'var(--hr-gradient-primary)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>🎯</div>
+            <h3 style={{ margin: '0 0 12px 0', color: 'var(--hr-text-primary)', fontSize: '20px' }}>No habits yet!</h3>
+            <p style={{ margin: 0, color: 'var(--hr-text-secondary)', fontSize: '14px', lineHeight: '1.5' }}>
               Create your first habit and start getting roasted! 🔥
             </p>
           </div>
@@ -446,17 +487,19 @@ export const IndexPage = () => {
 
         {/* Motivational Quote */}
         <div style={{
-          marginTop: '20px',
-          padding: '15px',
-          background: 'var(--tg-theme-secondary-bg-color, #f0f0f0)',
-          borderRadius: '12px',
+          marginTop: '24px',
+          padding: '18px',
+          background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(124, 58, 237, 0.15) 100%)',
+          borderRadius: '16px',
+          border: '1px solid rgba(139, 92, 246, 0.3)',
           textAlign: 'center',
         }}>
           <p style={{
             margin: 0,
             fontStyle: 'italic',
-            color: 'var(--tg-theme-hint-color, #666)',
+            color: 'var(--hr-text-secondary)',
             fontSize: '14px',
+            lineHeight: '1.6',
           }}>
             "{pendingToday > 0
               ? `You have ${pendingToday} habit${pendingToday > 1 ? 's' : ''} to complete. Don't let your streak die! 🔥`

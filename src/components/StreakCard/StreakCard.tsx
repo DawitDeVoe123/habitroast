@@ -29,10 +29,10 @@ export const StreakCard = ({ habitName, streak, roastLevel, username }: StreakCa
     };
 
     const getCardColor = () => {
-        if (streak >= 30) return 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)';
-        if (streak >= 14) return 'linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%)';
-        if (streak >= 7) return 'linear-gradient(135deg, #4CAF50 0%, #45B7D1 100%)';
-        return 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+        if (streak >= 30) return 'linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%)'; // Gold
+        if (streak >= 14) return 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)'; // Purple
+        if (streak >= 7) return 'linear-gradient(135deg, #10B981 0%, #059669 100%)'; // Emerald
+        return 'linear-gradient(135deg, #0F0A1A 0%, #1A1025 100%)'; // Dark
     };
 
     const shareToTelegram = async () => {
@@ -54,17 +54,17 @@ export const StreakCard = ({ habitName, streak, roastLevel, username }: StreakCa
         // Draw background
         const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
         if (streak >= 30) {
-            gradient.addColorStop(0, '#FFD700');
-            gradient.addColorStop(1, '#FFA500');
+            gradient.addColorStop(0, '#FBBF24');
+            gradient.addColorStop(1, '#F59E0B');
         } else if (streak >= 14) {
-            gradient.addColorStop(0, '#FF6B35');
-            gradient.addColorStop(1, '#FF8C42');
+            gradient.addColorStop(0, '#8B5CF6');
+            gradient.addColorStop(1, '#7C3AED');
         } else if (streak >= 7) {
-            gradient.addColorStop(0, '#4CAF50');
-            gradient.addColorStop(1, '#45B7D1');
+            gradient.addColorStop(0, '#10B981');
+            gradient.addColorStop(1, '#059669');
         } else {
-            gradient.addColorStop(0, '#667eea');
-            gradient.addColorStop(1, '#764ba2');
+            gradient.addColorStop(0, '#0F0A1A');
+            gradient.addColorStop(1, '#1A1025');
         }
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
