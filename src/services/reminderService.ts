@@ -20,12 +20,77 @@ interface Habit {
 class ReminderService {
     private checkInterval: ReturnType<typeof setInterval> | null = null;
     private readonly STORAGE_KEY = 'habit_reminders';
-    private readonly CHECK_INTERVAL_MS = 60000; // Check every minute
+    private readonly CHECK_INTERVAL_MS = 30000; // Check every 30 seconds for more accuracy
+    private audioContext: AudioContext | null = null;
+    private notificationSound: HTMLAudioElement | null = null;
 
     // Initialize the reminder service
     init() {
         this.startChecking();
         this.requestNotificationPermission();
+        this.preloadNotificationSound();
+    }
+
+    // Preload notification sound
+    private preloadNotificationSound() {
+        try {
+            this.notificationSound = new Audio();
+            // Use a base64 encoded notification sound or a reliable URL
+            this.notificationSound.volume = 0.7;
+        } catch (error) {
+            console.log('Could not preload notification sound:', error);
+        }
+    }
+
+    // Play notification sound
+    private playNotificationSound() {
+        try {
+            // Try Web Audio API first for more reliable sound
+            if (!this.audioContext) {
+                this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+            }
+
+            // Resume audio context if suspended
+            if (this.audioContext.state === 'suspended') {
+                this.audioContext.resume();
+            }
+
+            // Create a pleasant notification tone
+            const oscillator = this.audioContext.createOscillator();
+            const gainNode = this.audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(this.audioContext.destination);
+
+            // Pleasant ascending tone (like a notification ping)
+            oscillator.frequency.setValueAtTime(523.25, this.audioContext.currentTime); // C5
+            oscillator.frequency.setValueAtTime(659.25, this.audioContext.currentTime + 0.1); // E5
+            oscillator.frequency.setValueAtTime(783.99, this.audioContext.currentTime + 0.2); // G5
+
+            gainNode.gain.setValueAtTime(0.3, this.audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.5);
+
+            oscillator.start(this.audioContext.currentTime);
+            oscillator.stop(this.audioContext.currentTime + 0.5);
+
+            // Play a second tone for emphasis
+            setTimeout(() => {
+                if (this.audioContext && this.audioContext.state !== 'suspended') {
+                    const osc2 = this.audioContext.createOscillator();
+                    const gain2 = this.audioContext.createGain();
+                    osc2.connect(gain2);
+                    gain2.connect(this.audioContext.destination);
+                    osc2.frequency.setValueAtTime(783.99, this.audioContext.currentTime);
+                    gain2.gain.setValueAtTime(0.2, this.audioContext.currentTime);
+                    gain2.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.4);
+                    osc2.start(this.audioContext.currentTime);
+                    osc2.stop(this.audioContext.currentTime + 0.4);
+                }
+            }, 200);
+
+        } catch (error) {
+            console.log('Could not play notification sound:', error);
+        }
     }
 
     // Request notification permission from Telegram
@@ -103,6 +168,9 @@ class ReminderService {
 
     // Send a notification for a habit
     private sendNotification(habit: Habit) {
+        // Always play sound first
+        this.playNotificationSound();
+
         const roastMessages = {
             mild: [
                 `Hey! Don't forget to complete "${habit.name}" today! 😊`,
@@ -126,6 +194,69 @@ class ReminderService {
 
         // Try to use Telegram's native notification
         this.sendTelegramNotification(habit.name, message);
+
+        // Also trigger in-app visual notification
+        this.showInAppNotification(habit.name, message, habit.roastLevel);
+    }
+
+    // Show in-app notification (toast)
+    private showInAppNotification(habitName: string, message: string, roastLevel: string) {
+        // Create toast notification element
+        const toast = document.createElement('div');
+        toast.id = 'habit-roast-notification';
+        toast.style.cssText = `
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10000;
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.5);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 14px;
+            max-width: 90%;
+            text-align: center;
+            animation: slideIn 0.3s ease-out;
+        `;
+
+        const emoji = roastLevel === 'savage' ? '💀' : roastLevel === 'medium' ? '😈' : '⏰';
+        toast.innerHTML = `
+            <div style="font-size: 24px; margin-bottom: 8px;">${emoji}</div>
+            <div style="font-weight: bold; margin-bottom: 4px;">Time for: ${habitName}</div>
+            <div style="opacity: 0.9;">${message}</div>
+        `;
+
+        // Add animation keyframes if not already added
+        if (!document.getElementById('roast-notification-styles')) {
+            const style = document.createElement('style');
+            style.id = 'roast-notification-styles';
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(-50%) translateY(-100px); opacity: 0; }
+                    to { transform: translateX(-50%) translateY(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(-50%) translateY(0); opacity: 1; }
+                    to { transform: translateX(-50%) translateY(-100px); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Remove any existing toast
+        const existing = document.getElementById('habit-roast-notification');
+        if (existing) existing.remove();
+
+        document.body.appendChild(toast);
+
+        // Auto-dismiss after 8 seconds
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease-out forwards';
+            setTimeout(() => toast.remove(), 300);
+        }, 8000);
     }
 
     // Send notification via Telegram or browser
@@ -158,7 +289,7 @@ class ReminderService {
                 requireInteraction: true,
             });
         } else {
-            // Fallback to alert if notifications are not supported
+            // Fallback to console if notifications are not supported
             console.log(`Notification: ${title} - ${body}`);
         }
     }
