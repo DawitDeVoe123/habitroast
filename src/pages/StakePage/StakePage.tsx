@@ -82,6 +82,10 @@ export const StakePage = () => {
 
     const checkStakes = () => {
         const today = new Date().toISOString().split('T')[0];
+        let starsLost = 0;
+        let starsWon = 0;
+        let results: string[] = [];
+
         const updatedStakes = stakes.map((stake) => {
             if (stake.status === 'active') {
                 const habit = habits.find((h) => h.id === stake.habitId);
@@ -89,16 +93,39 @@ export const StakePage = () => {
                     const completedToday = habit.completedDates?.includes(today);
                     if (!completedToday) {
                         // Habit not completed today - stake is lost
+                        starsLost += stake.amount;
+                        results.push(`💸 Lost ${stake.amount} stars for missing "${habit.name}"`);
                         return {
                             ...stake,
                             status: 'lost' as const,
                             lostAt: new Date().toISOString(),
+                        };
+                    } else if (habit.streak >= 7) {
+                        // Streak of 7+ days - won!
+                        starsWon += stake.amount * 2;
+                        results.push(`🏆 Won ${stake.amount * 2} stars from "${habit.name}"!`);
+                        return {
+                            ...stake,
+                            status: 'won' as const,
+                            wonAt: new Date().toISOString(),
                         };
                     }
                 }
             }
             return stake;
         });
+
+        // Process the star changes
+        if (starsLost > 0) {
+            telegramStarsService.loseStars(starsLost, 'Missed habit stake');
+        }
+        if (starsWon > 0) {
+            telegramStarsService.earnStars(starsWon, 'Won streak challenge');
+        }
+
+        // Update total stars in state
+        const newBalance = telegramStarsService.getBalance();
+        setTotalStars(newBalance);
 
         localStorage.setItem('stakes', JSON.stringify(updatedStakes));
         setStakes(updatedStakes);
@@ -107,6 +134,13 @@ export const StakePage = () => {
         const activeStakes = updatedStakes.filter((s) => s.status === 'active');
         const atRisk = activeStakes.reduce((sum, s) => sum + s.amount, 0);
         setStarsAtRisk(atRisk);
+
+        // Show results to user
+        if (results.length > 0) {
+            alert(results.join('\n'));
+        } else {
+            alert('✅ All your stakes are safe! Keep going!');
+        }
     };
 
     const claimWinnings = (stakeId: number) => {
@@ -114,9 +148,11 @@ export const StakePage = () => {
         if (stake && stake.status === 'active') {
             const habit = habits.find((h) => h.id === stake.habitId);
             if (habit && habit.streak >= 7) {
-                // Won! Double the stake
+                // Won! Double the stake - use Telegram Stars service
                 const winnings = stake.amount * 2;
-                const updatedStars = totalStars + winnings;
+                telegramStarsService.earnStars(winnings, `Won streak challenge for "${habit.name}"`);
+
+                const newBalance = telegramStarsService.getBalance();
 
                 const updatedStakes = stakes.map((s) =>
                     s.id === stakeId
@@ -125,10 +161,9 @@ export const StakePage = () => {
                 );
 
                 localStorage.setItem('stakes', JSON.stringify(updatedStakes));
-                localStorage.setItem('totalStars', updatedStars.toString());
 
                 setStakes(updatedStakes);
-                setTotalStars(updatedStars);
+                setTotalStars(newBalance);
                 setStarsAtRisk(starsAtRisk - stake.amount);
 
                 alert(`🎉 Congratulations! You won ${winnings} Telegram Stars!`);
