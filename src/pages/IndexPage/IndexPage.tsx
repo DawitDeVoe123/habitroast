@@ -335,6 +335,57 @@ export const IndexPage = () => {
           </button>
 
           <button
+            onClick={() => navigate('/challenges')}
+            style={{
+              background: 'transparent',
+              color: 'var(--hr-primary-light)',
+              border: '2px solid var(--hr-primary)',
+              padding: '16px',
+              borderRadius: '14px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              width: '100%',
+            }}
+          >
+            🎯 Daily Challenges
+          </button>
+
+          <button
+            onClick={() => navigate('/calendar')}
+            style={{
+              background: 'transparent',
+              color: 'var(--hr-primary-light)',
+              border: '2px solid var(--hr-primary)',
+              padding: '16px',
+              borderRadius: '14px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              width: '100%',
+            }}
+          >
+            📅 Calendar
+          </button>
+
+          <button
+            onClick={() => navigate('/reports')}
+            style={{
+              background: 'transparent',
+              color: 'var(--hr-primary-light)',
+              border: '2px solid var(--hr-primary)',
+              padding: '16px',
+              borderRadius: '14px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              width: '100%',
+            }}
+          >
+            📈 Reports
+          </button>
+
+          <button
             onClick={() => navigate('/premium-themes')}
             style={{
               background: 'transparent',

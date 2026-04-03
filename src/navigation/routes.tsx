@@ -16,6 +16,7 @@ import { LeaderboardPage } from '@/pages/LeaderboardPage/LeaderboardPage';
 import { PremiumThemesPage } from '@/pages/PremiumThemesPage/PremiumThemesPage';
 import { CalendarPage } from '@/pages/CalendarPage/CalendarPage';
 import { ReportsPage } from '@/pages/ReportsPage/ReportsPage';
+import { ChallengesPage } from '@/pages/ChallengesPage/ChallengesPage';
 
 interface Route {
   path: string;
@@ -37,6 +38,7 @@ export const routes: Route[] = [
   { path: '/premium-themes', Component: PremiumThemesPage, title: 'Premium Themes' },
   { path: '/calendar', Component: CalendarPage, title: 'Calendar' },
   { path: '/reports', Component: ReportsPage, title: 'Reports' },
+  { path: '/challenges', Component: ChallengesPage, title: 'Challenges' },
   { path: '/init-data', Component: InitDataPage, title: 'Init Data' },
   { path: '/theme-params', Component: ThemeParamsPage, title: 'Theme Params' },
   { path: '/launch-params', Component: LaunchParamsPage, title: 'Launch Params' },

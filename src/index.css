@@ -1,5 +1,912 @@
+@import url('./css/theme-midnight-ember.css');
+
 body {
-  background: var(--tg-theme-secondary-bg-color, white);
+  background: var(--hr-bg-primary);
   padding: 0;
   margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Confetti animations */
+@keyframes confetti-0 {
+  to {
+    transform: translateY(100vh) rotate(720deg);
+  }
+}
+
+@keyframes confetti-1 {
+  to {
+    transform: translateY(100vh) rotate(540deg);
+  }
+}
+
+@keyframes confetti-2 {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+@keyframes confetti-3 {
+  to {
+    transform: translateY(100vh) rotate(900deg);
+  }
+}
+
+@keyframes confetti-4 {
+  to {
+    transform: translateY(100vh) rotate(450deg);
+  }
+}
+
+@keyframes confetti-5 {
+  to {
+    transform: translateY(100vh) rotate(630deg);
+  }
+}
+
+@keyframes confetti-6 {
+  to {
+    transform: translateY(100vh) rotate(810deg);
+  }
+}
+
+@keyframes confetti-7 {
+  to {
+    transform: translateY(100vh) rotate(270deg);
+  }
+}
+
+@keyframes confetti-8 {
+  to {
+    transform: translateY(100vh) rotate(540deg);
+  }
+}
+
+@keyframes confetti-9 {
+  to {
+    transform: translateY(100vh) rotate(900deg);
+  }
+}
+
+@keyframes confetti-10 {
+  to {
+    transform: translateY(100vh) rotate(180deg);
+  }
+}
+
+@keyframes confetti-11 {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+@keyframes confetti-12 {
+  to {
+    transform: translateY(100vh) rotate(720deg);
+  }
+}
+
+@keyframes confetti-13 {
+  to {
+    transform: translateY(100vh) rotate(540deg);
+  }
+}
+
+@keyframes confetti-14 {
+  to {
+    transform: translateY(100vh) rotate(450deg);
+  }
+}
+
+@keyframes confetti-15 {
+  to {
+    transform: translateY(100vh) rotate(630deg);
+  }
+}
+
+@keyframes confetti-16 {
+  to {
+    transform: translateY(100vh) rotate(810deg);
+  }
+}
+
+@keyframes confetti-17 {
+  to {
+    transform: translateY(100vh) rotate(270deg);
+  }
+}
+
+@keyframes confetti-18 {
+  to {
+    transform: translateY(100vh) rotate(540deg);
+  }
+}
+
+@keyframes confetti-19 {
+  to {
+    transform: translateY(100vh) rotate(900deg);
+  }
+}
+
+@keyframes confetti-20 {
+  to {
+    transform: translateY(100vh) rotate(180deg);
+  }
+}
+
+@keyframes confetti-21 {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+@keyframes confetti-22 {
+  to {
+    transform: translateY(100vh) rotate(720deg);
+  }
+}
+
+@keyframes confetti-23 {
+  to {
+    transform: translateY(100vh) rotate(540deg);
+  }
+}
+
+@keyframes confetti-24 {
+  to {
+    transform: translateY(100vh) rotate(450deg);
+  }
+}
+
+@keyframes confetti-25 {
+  to {
+    transform: translateY(100vh) rotate(630deg);
+  }
+}
+
+@keyframes confetti-26 {
+  to {
+    transform: translateY(100vh) rotate(810deg);
+  }
+}
+
+@keyframes confetti-27 {
+  to {
+    transform: translateY(100vh) rotate(270deg);
+  }
+}
+
+@keyframes confetti-28 {
+  to {
+    transform: translateY(100vh) rotate(540deg);
+  }
+}
+
+@keyframes confetti-29 {
+  to {
+    transform: translateY(100vh) rotate(900deg);
+  }
+}
+
+@keyframes confetti-30 {
+  to {
+    transform: translateY(100vh) rotate(180deg);
+  }
+}
+
+@keyframes confetti-31 {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+@keyframes confetti-32 {
+  to {
+    transform: translateY(100vh) rotate(720deg);
+  }
+}
+
+@keyframes confetti-33 {
+  to {
+    transform: translateY(100vh) rotate(540deg);
+  }
+}
+
+@keyframes confetti-34 {
+  to {
+    transform: translateY(100vh) rotate(450deg);
+  }
+}
+
+@keyframes confetti-35 {
+  to {
+    transform: translateY(100vh) rotate(630deg);
+  }
+}
+
+@keyframes confetti-36 {
+  to {
+    transform: translateY(100vh) rotate(810deg);
+  }
+}
+
+@keyframes confetti-37 {
+  to {
+    transform: translateY(100vh) rotate(270deg);
+  }
+}
+
+@keyframes confetti-38 {
+  to {
+    transform: translateY(100vh) rotate(540deg);
+  }
+}
+
+@keyframes confetti-39 {
+  to {
+    transform: translateY(100vh) rotate(900deg);
+  }
+}
+
+@keyframes confetti-40 {
+  to {
+    transform: translateY(100vh) rotate(180deg);
+  }
+}
+
+@keyframes confetti-41 {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+@keyframes confetti-42 {
+  to {
+    transform: translateY(100vh) rotate(720deg);
+  }
+}
+
+@keyframes confetti-43 {
+  to {
+    transform: translateY(100vh) rotate(540deg);
+  }
+}
+
+@keyframes confetti-44 {
+  to {
+    transform: translateY(100vh) rotate(450deg);
+  }
+}
+
+@keyframes confetti-45 {
+  to {
+    transform: translateY(100vh) rotate(630deg);
+  }
+}
+
+@keyframes confetti-46 {
+  to {
+    transform: translateY(100vh) rotate(810deg);
+  }
+}
+
+@keyframes confetti-47 {
+  to {
+    transform: translateY(100vh) rotate(270deg);
+  }
+}
+
+@keyframes confetti-48 {
+  to {
+    transform: translateY(100vh) rotate(540deg);
+  }
+}
+
+@keyframes confetti-49 {
+  to {
+    transform: translateY(100vh) rotate(900deg);
+  }
+}
+
+/* Apply animations */
+@keyframes confetti-0 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-1 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-2 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-3 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(900deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-4 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(450deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-5 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(630deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-6 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(810deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-7 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(270deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-8 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-9 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(900deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-10 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-11 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-12 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-13 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-14 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(450deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-15 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(630deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-16 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(810deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-17 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(270deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-18 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-19 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(900deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-20 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-21 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-22 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-23 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-24 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(450deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-25 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(630deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-26 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(810deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-27 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(270deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-28 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-29 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(900deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-30 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-31 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-32 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-33 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-34 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(450deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-35 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(630deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-36 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(810deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-37 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(270deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-38 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-39 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(900deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-40 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-41 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-42 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-43 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-44 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(450deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-45 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(630deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-46 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(810deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-47 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(270deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-48 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-49 {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(900deg);
+    opacity: 0;
+  }
 }
