@@ -3,6 +3,63 @@ import { useNavigate } from 'react-router-dom';
 import { Page } from '@/components/Page.tsx';
 import { GloryShameFeed } from '@/components/GloryShameFeed/GloryShameFeed';
 
+// Grid Icon Button Component
+const GridIconButton = ({
+  emoji,
+  label,
+  onClick,
+  badge,
+  gradient
+}: {
+  emoji: string;
+  label: string;
+  onClick: () => void;
+  badge?: number;
+  gradient?: string;
+}) => (
+  <button
+    onClick={onClick}
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '8px',
+      padding: '16px 8px',
+      background: gradient || 'var(--hr-bg-card)',
+      border: gradient ? 'none' : '1px solid rgba(139, 92, 246, 0.2)',
+      borderRadius: '16px',
+      cursor: 'pointer',
+      transition: 'all 0.2s ease',
+      minHeight: '100px',
+      position: 'relative',
+      boxShadow: gradient ? '0 4px 16px rgba(139, 92, 246, 0.3)' : 'none',
+    }}
+  >
+    {badge && (
+      <span style={{
+        position: 'absolute',
+        top: '8px',
+        right: '8px',
+        background: 'var(--hr-accent-gold)',
+        color: '#1a1a2e',
+        fontSize: '11px',
+        fontWeight: 'bold',
+        padding: '2px 8px',
+        borderRadius: '10px',
+      }}>
+        {badge}
+      </span>
+    )}
+    <span style={{ fontSize: '32px' }}>{emoji}</span>
+    <span style={{
+      fontSize: '12px',
+      fontWeight: '600',
+      color: gradient ? 'white' : 'var(--hr-text-primary)',
+    }}>{label}</span>
+  </button>
+);
+
 // Define the User type
 interface User {
   firstName?: string;
@@ -191,234 +248,76 @@ export const IndexPage = () => {
           </div>
         </div>
 
-        {/* Main Actions */}
+        {/* Main Actions - Icon Grid */}
         <div style={{
           display: 'grid',
-          gap: '14px'
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: '12px',
+          marginBottom: '24px',
         }}>
-          <button
+          <GridIconButton
+            emoji="➕"
+            label="Create"
             onClick={() => navigate('/create-habit')}
-            style={{
-              background: 'var(--hr-gradient-primary)',
-              color: 'white',
-              border: 'none',
-              padding: '18px',
-              borderRadius: '14px',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              width: '100%',
-              boxShadow: 'var(--hr-shadow-sm)',
-              transition: 'all 0.2s ease',
-            }}
-          >
-            ➕ Create New Habit
-          </button>
-
-          <button
+            gradient="var(--hr-gradient-primary)"
+          />
+          <GridIconButton
+            emoji="📋"
+            label="Habits"
             onClick={() => navigate('/habits')}
-            style={{
-              background: 'transparent',
-              color: 'var(--hr-primary-light)',
-              border: '2px solid var(--hr-primary)',
-              padding: '16px',
-              borderRadius: '14px',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              width: '100%',
-            }}
-          >
-            📋 My Habits {habits.length > 0 && `(${habits.length})`}
-          </button>
-
-          <button
+            badge={habits.length > 0 ? habits.length : undefined}
+          />
+          <GridIconButton
+            emoji="👥"
+            label="Circle"
             onClick={() => navigate('/accountability-circle')}
-            style={{
-              background: 'transparent',
-              color: 'var(--hr-primary-light)',
-              border: '2px solid var(--hr-primary)',
-              padding: '16px',
-              borderRadius: '14px',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              width: '100%',
-            }}
-          >
-            👥 My Accountability Circle
-          </button>
-
-          <button
-            onClick={() => navigate('/circles')}
-            style={{
-              background: 'transparent',
-              color: 'var(--hr-primary-light)',
-              border: '2px solid var(--hr-primary)',
-              padding: '16px',
-              borderRadius: '14px',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              width: '100%',
-            }}
-          >
-            👥 Accountability Circles
-          </button>
-
-          <button
+          />
+          <GridIconButton
+            emoji="⚔️"
+            label="Battles"
             onClick={() => navigate('/streak-battles')}
-            style={{
-              background: 'transparent',
-              color: 'var(--hr-primary-light)',
-              border: '2px solid var(--hr-primary)',
-              padding: '16px',
-              borderRadius: '14px',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              width: '100%',
-            }}
-          >
-            ⚔️ Streak Battles
-          </button>
-
-          <button
+          />
+          <GridIconButton
+            emoji="⭐"
+            label="Stake"
             onClick={() => navigate('/stake')}
-            style={{
-              background: 'transparent',
-              color: 'var(--hr-primary-light)',
-              border: '2px solid var(--hr-primary)',
-              padding: '16px',
-              borderRadius: '14px',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              width: '100%',
-            }}
-          >
-            ⭐ Stake & Roast
-          </button>
-
-          <button
+          />
+          <GridIconButton
+            emoji="🎁"
+            label="Invite"
             onClick={() => navigate('/invite')}
-            style={{
-              background: 'transparent',
-              color: 'var(--hr-primary-light)',
-              border: '2px solid var(--hr-primary)',
-              padding: '16px',
-              borderRadius: '14px',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              width: '100%',
-            }}
-          >
-            🎁 Invite to Unlock
-          </button>
-
-          <button
+          />
+          <GridIconButton
+            emoji="🏆"
+            label="Ranks"
             onClick={() => navigate('/leaderboard')}
-            style={{
-              background: 'transparent',
-              color: 'var(--hr-primary-light)',
-              border: '2px solid var(--hr-primary)',
-              padding: '16px',
-              borderRadius: '14px',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              width: '100%',
-            }}
-          >
-            🏆 Leaderboard
-          </button>
-
-          <button
+          />
+          <GridIconButton
+            emoji="🎯"
+            label="Challenge"
             onClick={() => navigate('/challenges')}
-            style={{
-              background: 'transparent',
-              color: 'var(--hr-primary-light)',
-              border: '2px solid var(--hr-primary)',
-              padding: '16px',
-              borderRadius: '14px',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              width: '100%',
-            }}
-          >
-            🎯 Daily Challenges
-          </button>
-
-          <button
+          />
+          <GridIconButton
+            emoji="📅"
+            label="Calendar"
             onClick={() => navigate('/calendar')}
-            style={{
-              background: 'transparent',
-              color: 'var(--hr-primary-light)',
-              border: '2px solid var(--hr-primary)',
-              padding: '16px',
-              borderRadius: '14px',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              width: '100%',
-            }}
-          >
-            📅 Calendar
-          </button>
-
-          <button
+          />
+          <GridIconButton
+            emoji="📈"
+            label="Reports"
             onClick={() => navigate('/reports')}
-            style={{
-              background: 'transparent',
-              color: 'var(--hr-primary-light)',
-              border: '2px solid var(--hr-primary)',
-              padding: '16px',
-              borderRadius: '14px',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              width: '100%',
-            }}
-          >
-            📈 Reports
-          </button>
-
-          <button
+          />
+          <GridIconButton
+            emoji="🎨"
+            label="Themes"
             onClick={() => navigate('/premium-themes')}
-            style={{
-              background: 'transparent',
-              color: 'var(--hr-primary-light)',
-              border: '2px solid var(--hr-primary)',
-              padding: '16px',
-              borderRadius: '14px',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              width: '100%',
-            }}
-          >
-            🎨 Premium Themes
-          </button>
-
-          <button
+          />
+          <GridIconButton
+            emoji="🔥"
+            label="Roast"
             onClick={() => alert(getRandomRoast())}
-            style={{
-              background: 'var(--hr-gradient-ember)',
-              color: 'white',
-              border: 'none',
-              padding: '18px',
-              borderRadius: '14px',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              width: '100%',
-              boxShadow: '0 4px 16px rgba(239, 68, 68, 0.3)',
-            }}
-          >
-            🔥 Roast Me Now
-          </button>
+            gradient="var(--hr-gradient-ember)"
+          />
         </div>
 
         {/* Today's Progress */}
