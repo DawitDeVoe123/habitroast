@@ -52,31 +52,46 @@ export const StakePage = () => {
     };
 
     const depositStake = () => {
-        if (selectedHabit && depositAmount > 0 && depositAmount <= totalStars) {
-            const habit = habits.find((h) => h.id === selectedHabit);
-            if (habit) {
-                const newStake: Stake = {
-                    id: Date.now(),
-                    habitId: habit.id,
-                    habitName: habit.name,
-                    amount: depositAmount,
-                    depositedAt: new Date().toISOString(),
-                    status: 'active',
-                };
+        if (!selectedHabit) {
+            alert('Please select a habit first');
+            return;
+        }
 
-                const updatedStakes = [...stakes, newStake];
-                const updatedStars = totalStars - depositAmount;
+        if (depositAmount <= 0) {
+            alert('Please select a valid amount');
+            return;
+        }
 
-                localStorage.setItem('stakes', JSON.stringify(updatedStakes));
-                localStorage.setItem('totalStars', updatedStars.toString());
+        if (depositAmount > totalStars) {
+            alert(`❌ Not enough Telegram Stars!\n\nYou have ⭐ ${totalStars} but need ⭐ ${depositAmount}.\n\nClick "Get More Stars" to add more stars to your wallet.`);
+            return;
+        }
 
-                setStakes(updatedStakes);
-                setTotalStars(updatedStars);
-                setStarsAtRisk(starsAtRisk + depositAmount);
-                setShowDepositForm(false);
-                setSelectedHabit(null);
-                setDepositAmount(10);
-            }
+        const habit = habits.find((h) => h.id === selectedHabit);
+        if (habit) {
+            const newStake: Stake = {
+                id: Date.now(),
+                habitId: habit.id,
+                habitName: habit.name,
+                amount: depositAmount,
+                depositedAt: new Date().toISOString(),
+                status: 'active',
+            };
+
+            const updatedStakes = [...stakes, newStake];
+            const updatedStars = totalStars - depositAmount;
+
+            localStorage.setItem('stakes', JSON.stringify(updatedStakes));
+            localStorage.setItem('totalStars', updatedStars.toString());
+
+            setStakes(updatedStakes);
+            setTotalStars(updatedStars);
+            setStarsAtRisk(starsAtRisk + depositAmount);
+            setShowDepositForm(false);
+            setSelectedHabit(null);
+            setDepositAmount(10);
+
+            alert(`✅ Successfully deposited ⭐ ${depositAmount} on "${habit.name}"!\n\nGood luck keeping your streak! 🔥`);
         }
     };
 
@@ -252,6 +267,29 @@ export const StakePage = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Get Stars Button */}
+                <button
+                    onClick={() => telegramStarsService.purchaseStars()}
+                    style={{
+                        width: '100%',
+                        padding: '12px',
+                        borderRadius: '8px',
+                        border: '1px solid rgba(255, 207, 48, 0.3)',
+                        background: 'rgba(255, 207, 48, 0.15)',
+                        color: '#FFCF30',
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        cursor: 'pointer',
+                        marginBottom: '20px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                    }}
+                >
+                    <span>⭐</span> Get More Stars
+                </button>
 
                 {/* Deposit Stake */}
                 {showDepositForm ? (
