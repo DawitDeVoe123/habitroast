@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '@/components/Page.tsx';
 import { GloryShameFeed } from '@/components/GloryShameFeed/GloryShameFeed';
+import { telegramStarsService } from '@/services/telegramStarsService';
 
 // Grid Icon Button Component
 const GridIconButton = ({
@@ -167,9 +168,27 @@ export const IndexPage = () => {
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
           }}>🔥</span>
-          <div>
+          <div style={{ flex: 1 }}>
             <h1 style={{ margin: 0, fontSize: '26px', color: 'var(--hr-text-primary)' }}>HabitRoast</h1>
             <p style={{ margin: '4px 0 0 0', fontSize: '12px', color: 'var(--hr-primary-light)' }}>Midnight Ember Edition</p>
+          </div>
+          <div
+            onClick={() => telegramStarsService.purchaseStars()}
+            style={{
+              background: 'rgba(255, 207, 48, 0.15)',
+              padding: '8px 14px',
+              borderRadius: '20px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              cursor: 'pointer',
+              border: '1px solid rgba(255, 207, 48, 0.3)',
+            }}
+          >
+            <span style={{ fontSize: '18px' }}>⭐</span>
+            <span style={{ fontSize: '16px', fontWeight: 'bold', color: '#FFCF30' }}>
+              {telegramStarsService.getBalance()}
+            </span>
           </div>
         </header>
 

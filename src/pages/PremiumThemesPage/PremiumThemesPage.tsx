@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Page } from '@/components/Page.tsx';
+import { telegramStarsService } from '@/services/telegramStarsService';
 
 interface Theme {
     id: number;
@@ -142,9 +143,29 @@ export const PremiumThemesPage = () => {
 
         setIsPurchasing(true);
 
-        // Simulate purchase with Telegram Stars
-        // In a real app, this would integrate with Telegram's payment API
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        // Check if user has enough Telegram Stars
+        const balance = telegramStarsService.getBalance();
+        if (balance < theme.price) {
+            // Not enough stars - offer to purchase more
+            const wantToPurchase = confirm(
+                `You need ${theme.price} stars to unlock "${theme.name}", but you only have ${balance}. \n\nWould you like to buy more Telegram Stars?`
+            );
+
+            if (wantToPurchase) {
+                await telegramStarsService.purchaseStars();
+            }
+            setIsPurchasing(false);
+            return;
+        }
+
+        // Use Telegram Stars service to spend stars
+        const success = telegramStarsService.spendStars(theme.price, theme.name);
+
+        if (!success) {
+            setIsPurchasing(false);
+            alert('Failed to process payment. Please try again.');
+            return;
+        }
 
         const updatedThemes = themes.map(t =>
             t.id === themeId ? { ...t, unlocked: true } : t

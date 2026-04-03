@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Page } from '@/components/Page.tsx';
+import { telegramStarsService } from '@/services/telegramStarsService';
 
 interface Stake {
     id: number;
@@ -36,11 +37,13 @@ export const StakePage = () => {
     const loadData = () => {
         const storedStakes = JSON.parse(localStorage.getItem('stakes') || '[]');
         const storedHabits = JSON.parse(localStorage.getItem('habits') || '[]');
-        const storedStars = parseInt(localStorage.getItem('totalStars') || '100');
+
+        // Use Telegram Stars service for real balance
+        const balance = telegramStarsService.getBalance();
 
         setStakes(storedStakes);
         setHabits(storedHabits);
-        setTotalStars(storedStars);
+        setTotalStars(balance);
 
         // Calculate stars at risk
         const activeStakes = storedStakes.filter((s: Stake) => s.status === 'active');
